@@ -9,6 +9,9 @@ namespace ScientificGameJam.SO
 
         [Range(0f, 10f)]
         [Tooltip("Speed of the player")]
-        public float Speed = 5f;
+        public float SpeedMultiplicator = 5f;
+
+        [Tooltip("Rotation speed")]
+        public float TorqueMultiplicator = .5f;
     }
 }

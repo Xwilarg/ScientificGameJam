@@ -11,7 +11,8 @@ namespace ScientificGameJam.Player
         private PlayerInfo _info;
 
         private Rigidbody2D _rb;
-        private Vector2 _mov;
+        private float _verSpeed;
+        private float _rot;
 
         private void Start()
         {
@@ -20,12 +21,16 @@ namespace ScientificGameJam.Player
 
         private void FixedUpdate()
         {
-            _rb.AddForce(_mov * _info.Speed);
+            _rb.AddForce(_info.SpeedMultiplicator * _verSpeed * transform.up);
+
+            transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
         }
 
         public void OnMovement(InputAction.CallbackContext value)
         {
-            _mov = value.ReadValue<Vector2>().normalized;
+            var mov = value.ReadValue<Vector2>().normalized;
+            _verSpeed = mov.y;
+            _rot = mov.x;
         }
     }
 }
