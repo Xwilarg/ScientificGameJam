@@ -29,13 +29,13 @@ namespace ScientificGameJam.SaveData
                     BestTime = reader.ReadSingle();
 
                     var dictLength = reader.ReadInt32();
-                    var coor = new Dictionary<float, PlayerCoordinate>();
+                    var coor = new List<PlayerCoordinate>();
                     for (int i = 0; i < dictLength; i++)
                     {
                         var time = reader.ReadSingle();
                         var pos = new Vector2(reader.ReadSingle(), reader.ReadSingle());
                         var angle = reader.ReadSingle();
-                        coor.Add(time, new PlayerCoordinate
+                        coor.Add(new PlayerCoordinate
                         {
                             TimeSinceStart = time,
                             Position = pos,
@@ -61,22 +61,22 @@ namespace ScientificGameJam.SaveData
             writer.Write(Coordinates.Count);
             foreach (var elem in Coordinates)
             {
-                writer.Write(elem.Key);
-                writer.Write(elem.Value.Position.x);
-                writer.Write(elem.Value.Position.y);
-                writer.Write(elem.Value.Rotation);
+                writer.Write(elem.TimeSinceStart);
+                writer.Write(elem.Position.x);
+                writer.Write(elem.Position.y);
+                writer.Write(elem.Rotation);
             }
         }
 
         public bool HaveBestTime => Coordinates.Any();
         public float BestTime { private set; get; } = -1f;
-        public IReadOnlyDictionary<float, PlayerCoordinate> Coordinates { private set; get; } = new Dictionary<float, PlayerCoordinate>();
+        public IReadOnlyList<PlayerCoordinate> Coordinates { private set; get; } = new List<PlayerCoordinate>();
         public void UpdateBestTime(float timer, List<PlayerCoordinate> coordinates)
         {
             if (!HaveBestTime || timer < BestTime)
             {
                 BestTime = timer;
-                Coordinates = coordinates.ToDictionary(x => x.TimeSinceStart, x => x);
+                Coordinates = coordinates;
                 UpdateSavesTime();
             }
         }

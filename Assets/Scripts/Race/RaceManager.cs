@@ -75,7 +75,7 @@ public class RaceManager : MonoBehaviour
         _raceCountdown.text = "1";
         yield return new WaitForSeconds(1f);
         _raceCountdown.gameObject.SetActive(false);
-        _player.CanMove = true;
+        _player.StartRace();
         _didRaceStart = true;
     }
 }
