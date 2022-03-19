@@ -35,11 +35,13 @@ namespace ScientificGameJam.SaveData
                         var time = reader.ReadSingle();
                         var pos = new Vector2(reader.ReadSingle(), reader.ReadSingle());
                         var angle = reader.ReadSingle();
+                        var vel = new Vector2(reader.ReadSingle(), reader.ReadSingle());
                         coor.Add(new PlayerCoordinate
                         {
                             TimeSinceStart = time,
                             Position = pos,
-                            Rotation = angle
+                            Rotation = angle,
+                            Velocity = vel
                         });
                     }
                     Coordinates = coor;
@@ -65,6 +67,8 @@ namespace ScientificGameJam.SaveData
                 writer.Write(elem.Position.x);
                 writer.Write(elem.Position.y);
                 writer.Write(elem.Rotation);
+                writer.Write(elem.Velocity.x);
+                writer.Write(elem.Velocity.y);
             }
         }
 

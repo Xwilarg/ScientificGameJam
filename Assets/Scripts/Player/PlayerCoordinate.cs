@@ -10,5 +10,6 @@ namespace ScientificGameJam.Player
         public float Rotation { set; get; }
         public Vector2 Position { set; get; }
         public float TimeSinceStart { set; get; }
+        public Vector2 Velocity { set; get; }
     }
 }

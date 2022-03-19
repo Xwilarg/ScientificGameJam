@@ -8,12 +8,13 @@ namespace ScientificGameJam.Player
     {
         public void LoadData()
         {
+            _rb = GetComponent<Rigidbody2D>();
             _coordinates = SaveLoad.Instance.Coordinates;
             _refTimer = Time.unscaledTime;
             _didStart = true;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_didStart)
             {
@@ -26,12 +27,15 @@ namespace ScientificGameJam.Player
                     {
                         var prog = (targetTime - last.TimeSinceStart) / (current.TimeSinceStart - last.TimeSinceStart);
                         transform.position = Vector2.Lerp(last.Position, current.Position, prog);
+                        _rb.velocity = Vector2.Lerp(last.Velocity, current.Velocity, prog);
                         transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Lerp(last.Rotation, current.Rotation, prog));
                     }
                     last = current;
                 }
             }
         }
+
+        private Rigidbody2D _rb;
 
         private IReadOnlyList<PlayerCoordinate> _coordinates;
         private float _refTimer;

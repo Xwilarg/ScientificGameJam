@@ -60,31 +60,29 @@ namespace ScientificGameJam.Player
 
         private void FixedUpdate()
         {
-            if (!CanMove)
+            if (CanMove)
             {
-                return;
-            }
+                // If we are accelerating/descelerating
+                if (Mathf.Abs(_verSpeed) > 0f)
+                {
+                    var speed = _rb.velocity.magnitude;
+                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed);
+                }
 
-            // If we are accelerating/descelerating
-            if (Mathf.Abs(_verSpeed) > 0f)
-            {
-                var speed = _rb.velocity.magnitude;
-                _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed);
-            }
+                transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
 
-            transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
+                _currentCoordinates.Add(new PlayerCoordinate
+                {
+                    TimeSinceStart = Time.unscaledTime - _timerRef,
+                    Position = transform.position,
+                    Rotation = transform.rotation.eulerAngles.z
+                });
+            }
 
             if (DebugManager.Instance != null)
             {
                 DebugManager.Instance.UpdateDebugText($"Speed: {_rb.velocity.magnitude:0.00}");
             }
-
-            _currentCoordinates.Add(new PlayerCoordinate
-            {
-                TimeSinceStart = Time.unscaledTime - _timerRef,
-                Position = transform.position,
-                Rotation = transform.rotation.eulerAngles.z
-            });
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
