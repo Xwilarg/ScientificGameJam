@@ -9,6 +9,7 @@ namespace ScientificGameJam.PowerUp
     {
         public static PowerUpManager Instance { get; private set; }
         [SerializeField] private PowerupInfo[] _powers;
+        public List<PowerupInfo> AvailablePowerUps { private set; get; } = new List<PowerupInfo>();
         public List<PowerupInfo> EquippedPowerUps { private set; get; } = new List<PowerupInfo>();
 
         public void Awake()
@@ -18,7 +19,7 @@ namespace ScientificGameJam.PowerUp
             // Debug
             foreach (var power in _powers)
             {
-                EquippedPowerUps.Add(power);
+                AvailablePowerUps.Add(power);
             }
         }
 
