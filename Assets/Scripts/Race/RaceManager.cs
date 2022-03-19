@@ -1,4 +1,5 @@
 using ScientificGameJam.Player;
+using ScientificGameJam.PowerUp;
 using ScientificGameJam.SaveData;
 using ScientificGameJam.SO;
 using ScientificGameJam.Translation;
@@ -129,6 +130,14 @@ namespace ScientificGameJam.Race
             _raceCountdown.gameObject.SetActive(false);
             _player.StartRace();
             _didRaceStart = true;
+
+            foreach (var power in PowerUpManager.Instance.EquippedPowerUps)
+            {
+                if (power.IsPassive)
+                {
+                    PowerUpManager.Instance.TriggerPowerup(power);
+                }
+            }
         }
 
         public void OnRestart(InputAction.CallbackContext input)
