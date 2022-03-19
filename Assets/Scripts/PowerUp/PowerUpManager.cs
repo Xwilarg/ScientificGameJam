@@ -85,7 +85,7 @@ namespace ScientificGameJam.PowerUp
             }
         }
 
-        public void TriggerPowerup(PowerupInfo info)
+        public void TriggerPowerup(PowerupInfo info, PlayerController player)
         {
             switch (info.Effect)
             {
@@ -94,7 +94,7 @@ namespace ScientificGameJam.PowerUp
                     break;
 
                 case PowerupEffect.SpeedBoost:
-                    //player.GainSpeedBoost(float.Parse(info.Argument));
+                    player.GainSpeedBoost(float.Parse(info.Argument));
                     break;
 
                 default:
