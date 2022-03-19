@@ -35,6 +35,9 @@ namespace ScientificGameJam.Race
         [SerializeField]
         private PlayerController _player;
 
+        [SerializeField]
+        private Camera _playerCamera, _overviewCamera;
+
         public float RaceTimer { private set; get; }
         private bool _didRaceStart;
 
@@ -54,9 +57,12 @@ namespace ScientificGameJam.Race
 
         public void StartRace()
         {
+            // Set camera on player
+            _playerCamera.gameObject.SetActive(true);
+            _overviewCamera.gameObject.SetActive(false);
+
+            // Reset timer and text
             RaceTimer = 0f;
-            _player.CanMove = false;
-            _raceCountdown.gameObject.SetActive(true);
             _mainTimer.text = "0.00";
             _bestTimer.text = $"{Translate.Instance.Tr("best")}{Translate.Instance.Tr("colon")} ";
             if (SaveLoad.Instance.HaveBestTime)
@@ -67,6 +73,11 @@ namespace ScientificGameJam.Race
             {
                 _bestTimer.text += $"{Translate.Instance.Tr("none")}";
             }
+
+            // Prevent player to move until countdown ends
+            _player.CanMove = false;
+            _raceCountdown.gameObject.SetActive(true);
+
             StartCoroutine(LaunchRaceCountdown());
         }
 

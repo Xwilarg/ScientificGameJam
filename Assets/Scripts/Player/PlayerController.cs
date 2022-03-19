@@ -18,14 +18,17 @@ namespace ScientificGameJam.Player
         [SerializeField]
         private GameObject _ghost;
 
+        // Base controls
         private Rigidbody2D _rb;
         private float _verSpeed;
         private float _rot;
-        private readonly List<Ghost> _ghosts = new List<Ghost>();
 
+        // Saves and ghosts
+        private readonly List<Ghost> _ghosts = new List<Ghost>();
         private readonly List<PlayerCoordinate> _currentCoordinates = new List<PlayerCoordinate>();
         private float _timerRef;
 
+        // Allow/Disallow player controls
         private bool _canMove;
         public bool CanMove
         {
@@ -40,6 +43,7 @@ namespace ScientificGameJam.Player
             }
         }
 
+        // Original pos and rot used for reset
         private Vector2 _orPos;
         private float _orRot;
 
@@ -81,7 +85,11 @@ namespace ScientificGameJam.Player
                 // If we are accelerating/descelerating
                 if (Mathf.Abs(_verSpeed) > 0f)
                 {
-                    var speed = _rb.velocity.magnitude;
+                    float speed = 0f;
+                    if (_rb.velocity != Vector2.zero)
+                    {
+                        speed = _rb.velocity.magnitude * Vector2.Dot(_rb.velocity, transform.up) / Mathf.Abs(Vector2.Dot(_rb.velocity, transform.up));
+                    }
                     _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed);
                 }
 
