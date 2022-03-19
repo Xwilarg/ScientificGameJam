@@ -203,7 +203,7 @@ namespace ScientificGameJam.Player
         {
             if (value.performed && ActivePowerups.Any())
             {
-                PowerUpManager.Instance.TriggerPowerup(ActivePowerups[0], this);
+                //PowerUpManager.Instance.TriggerPowerup(ActivePowerups[0], this);
                 ActivePowerups.RemoveAt(0);
                 UpdatePowerupList();
             }

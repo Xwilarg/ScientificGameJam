@@ -4,12 +4,13 @@ using UnityEngine.EventSystems;
 namespace ScientificGameJam.UI
 {
     public class PUDragHandler : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
-    {        
+    {
         private RectTransform _canvas; //UI Canvas
         private Vector2 _offset;
 
         private GameObject draggedObject; //The object being dragged
         private CanvasGroup canvasGroup;
+        public string powerUpName;
 
         public void Awake()
         {
