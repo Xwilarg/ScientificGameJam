@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: HelloWorld
   Description: Say hello in the console
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 43a1aa913dae5aa4281d1848cd2dd0d3, type: 3}
   IsPassive: 1
   Argument: Hello, World!
   Effect: 2

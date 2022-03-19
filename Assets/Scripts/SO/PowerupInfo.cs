@@ -1,6 +1,5 @@
 ﻿using ScientificGameJam.PowerUp;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ScientificGameJam.SO
 {
@@ -10,7 +9,7 @@ namespace ScientificGameJam.SO
         public string Title;
         public string Description;
 
-        public Image Image;
+        public Sprite Image;
 
         //Wether the power-up is passive or activates with a button
         public bool IsPassive;
