@@ -122,6 +122,11 @@ namespace ScientificGameJam.Player
             _orRot = transform.rotation.eulerAngles.z;
         }
 
+        private void Start()
+        {
+            StopRace();
+        }
+
         private void Update()
         {
             if (_speedBoost > 1f)
