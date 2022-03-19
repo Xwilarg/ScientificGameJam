@@ -53,7 +53,7 @@ namespace ScientificGameJam.Player
             transform.rotation = Quaternion.Euler(0f, 0f, _orRot);
             foreach (var ghost in _ghosts)
             {
-                Destroy(ghost);
+                Destroy(ghost.gameObject);
             }
             _ghosts.Clear();
         }

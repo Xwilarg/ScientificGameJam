@@ -1,7 +1,9 @@
 using ScientificGameJam.Player;
 using ScientificGameJam.SaveData;
+using ScientificGameJam.SO;
 using ScientificGameJam.Translation;
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +18,9 @@ namespace ScientificGameJam.Race
         {
             Instance = this;
         }
+
+        [SerializeField]
+        private LevelInfo _currentLevel;
 
         /// <summary>
         /// Text displaying the countdown when the race start
@@ -38,6 +43,13 @@ namespace ScientificGameJam.Race
         [SerializeField]
         private Camera _playerCamera, _overviewCamera;
 
+        [Header("Course end")]
+        [SerializeField]
+        private GameObject _courseEndGo;
+
+        [SerializeField]
+        private TMP_Text _timerEnd, _msgEnd;
+
         public float RaceTimer { private set; get; }
         private bool _didRaceStart;
 
@@ -57,6 +69,8 @@ namespace ScientificGameJam.Race
 
         public void StartRace()
         {
+            _courseEndGo.SetActive(false);
+
             // Set camera on player
             _playerCamera.gameObject.SetActive(true);
             _overviewCamera.gameObject.SetActive(false);
@@ -84,6 +98,23 @@ namespace ScientificGameJam.Race
         public void EndRace()
         {
             _didRaceStart = false;
+            _courseEndGo.SetActive(true);
+            _timerEnd.text = $"{RaceTimer:0.00}s";
+            if (RaceTimer < _currentLevel.Medals[0].Time)
+            {
+                _msgEnd.text = Translate.Instance.Tr("gotAllMedals");
+            }
+            else
+            {
+                foreach (var medal in _currentLevel.Medals.Reverse())
+                {
+                    if (RaceTimer > medal.Time)
+                    {
+                        _msgEnd.text = Translate.Instance.Tr("nextMedal", $"{medal.Time:0.00}");
+                        break;
+                    }
+                }
+            }
         }
 
         private IEnumerator LaunchRaceCountdown()

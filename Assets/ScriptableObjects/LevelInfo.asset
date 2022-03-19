@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e1786dd451a6d4ca17dcb69175fe5c, type: 3}
   m_Name: LevelInfo
   m_EditorClassIdentifier: 
-  SceneName: Controls
-  Gold: 8
-  Silver: 10
-  Bronze: 15
+  Medals:
+  - Name: Gold
+    Time: 8
+  - Name: Silver
+    Time: 10
+  - Name: Copper
+    Time: 15
