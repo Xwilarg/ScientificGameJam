@@ -361,24 +361,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &2009283293 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1469814216552070470, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
-  m_PrefabInstance: {fileID: 1469814217780791195}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2009283294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009283293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa8380bc3ea050c4cb3787ab970bf0e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _info: {fileID: 11400000, guid: 5748cac16b6d19b4ebdfdfd005dc9329, type: 2}
 --- !u!4 &2009283299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1469814216552070468, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
@@ -500,38 +482,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2009283294, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
-      propertyPath: m_LinearDrag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2009283295, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2009283295, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2009283295, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2009283294}
-    - target: {fileID: 2009283295, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2009283295, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnMovement
-      objectReference: {fileID: 0}
-    - target: {fileID: 2009283295, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ScientificGameJam.Player.PlayerController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2009283295, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 1469814216552070468, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
       propertyPath: m_RootOrder
       value: 1
