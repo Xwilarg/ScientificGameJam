@@ -75,7 +75,8 @@ namespace ScientificGameJam.Player
                 {
                     TimeSinceStart = Time.unscaledTime - _timerRef,
                     Position = transform.position,
-                    Rotation = transform.rotation.eulerAngles.z
+                    Rotation = transform.rotation.eulerAngles.z,
+                    Velocity = _rb.velocity
                 });
             }
 
