@@ -10,7 +10,6 @@ namespace ScientificGameJam.UI
 {
     public class PowerUpManager : MonoBehaviour
     {
-        Destroy
         public static PowerUpManager instance { get; private set; }
         private List<PowerUp> powers;
 
