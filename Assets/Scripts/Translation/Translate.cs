@@ -35,14 +35,23 @@ namespace ScientificGameJam.Translation
             }
         }
 
-        public string Tr(string key)
+        public string Tr(string key, params string[] arguments)
         {
             var langData = _translationData[_currentLanguage];
+            string sentence;
             if (langData.ContainsKey(key))
             {
-                return langData[key];
+                sentence = langData[key];
             }
-            return _translationData["english"][key];
+            else
+            {
+                sentence = _translationData["english"][key];
+            }
+            for (int i = 0; i < arguments.Length; i++)
+            {
+                sentence = sentence.Replace("{" + i + "}", arguments[i]);
+            }
+            return sentence;
         }
 
         private string _currentLanguage = "french";

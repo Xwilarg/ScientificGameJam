@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9069e88cb18dd374f8e6a5af2fa21de6, type: 3}
-  m_Name: PlayerInfo
+  m_Script: {fileID: 11500000, guid: d8e1786dd451a6d4ca17dcb69175fe5c, type: 3}
+  m_Name: LevelInfo
   m_EditorClassIdentifier: 
-  Acceleration: 0.25
-  MaxSpeed: 10
-  TorqueMultiplicator: 0.25
+  Medals:
+  - Name: Gold
+    Time: 8
+  - Name: Silver
+    Time: 10
+  - Name: Copper
+    Time: 15
