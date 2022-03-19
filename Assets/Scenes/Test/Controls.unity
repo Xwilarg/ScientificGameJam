@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f4064e88b551b4b95b7f97bbf7b855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puContainer: {fileID: 569715923}
+  puContainer: {fileID: 1250265912}
   puPrefab: {fileID: 2293110381403901443, guid: c3c57685e4e1afd4b94e4549a648a284, type: 3}
   _baseContainer: {fileID: 1486833535}
   containerPadding: 20
@@ -8315,11 +8315,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8348291403472940440, guid: bdc0c79acf573404fa84cf9714d5415f, type: 3}
   m_PrefabInstance: {fileID: 569715921}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &569715923 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8348291403472940443, guid: bdc0c79acf573404fa84cf9714d5415f, type: 3}
-  m_PrefabInstance: {fileID: 569715921}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &605958130
 GameObject:
   m_ObjectHideFlags: 0
@@ -9268,6 +9263,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1250265912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8348291402859804332, guid: bdc0c79acf573404fa84cf9714d5415f, type: 3}
+  m_PrefabInstance: {fileID: 569715921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1427922121
 GameObject:
   m_ObjectHideFlags: 0
