@@ -1,4 +1,6 @@
 using ScientificGameJam.Player;
+using ScientificGameJam.SaveData;
+using ScientificGameJam.Translation;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -19,10 +21,10 @@ public class RaceManager : MonoBehaviour
     private TMP_Text _raceCountdown;
 
     /// <summary>
-    /// Current time of the player in the race
+    /// Current and best time of the player in the race
     /// </summary>
     [SerializeField]
-    private TMP_Text _mainTimer;
+    private TMP_Text _mainTimer, _bestTimer;
 
     /// <summary>
     /// Reference to the player
@@ -30,7 +32,7 @@ public class RaceManager : MonoBehaviour
     [SerializeField]
     private PlayerController _player;
 
-    private float _raceTimer;
+    public float RaceTimer { private set; get; }
     private bool _didRaceStart;
 
     private void Start()
@@ -38,6 +40,15 @@ public class RaceManager : MonoBehaviour
         _player.CanMove = false;
         _raceCountdown.gameObject.SetActive(true);
         _mainTimer.text = "0.00";
+        _bestTimer.text = $"{Translate.Instance.Tr("best")}{Translate.Instance.Tr("colon")} ";
+        if (SaveLoad.Instance.HaveBestTime)
+        {
+            _bestTimer.text += $"{SaveLoad.Instance.BestTime:0.00}";
+        }
+        else
+        {
+            _bestTimer.text += $"{Translate.Instance.Tr("none")}";
+        }
         StartCoroutine(LaunchRaceCountdown());
     }
 
@@ -45,8 +56,8 @@ public class RaceManager : MonoBehaviour
     {
         if (_didRaceStart)
         {
-            _raceTimer += Time.deltaTime;
-            _mainTimer.text = $"{_raceTimer:0.00}";
+            RaceTimer += Time.deltaTime;
+            _mainTimer.text = $"{RaceTimer:0.00}";
         }
     }
 

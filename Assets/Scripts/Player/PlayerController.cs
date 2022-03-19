@@ -1,5 +1,7 @@
 using ScientificGameJam.Debug;
+using ScientificGameJam.SaveData;
 using ScientificGameJam.SO;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +17,9 @@ namespace ScientificGameJam.Player
         private float _verSpeed;
         private float _rot;
 
+        private readonly List<PlayerCoordinate> _currentCoordinates = new List<PlayerCoordinate>();
+        private float _timerRef;
+
         private bool _canMove;
         public bool CanMove
         {
@@ -24,6 +29,10 @@ namespace ScientificGameJam.Player
                 if (!value)
                 {
                     _rb.velocity = Vector3.zero;
+                }
+                else // Race started
+                {
+                    _timerRef = Time.unscaledTime;
                 }
                 _canMove = value;
             }
@@ -53,14 +62,23 @@ namespace ScientificGameJam.Player
             {
                 DebugManager.Instance.UpdateDebugText($"Speed: {_rb.velocity.magnitude:0.00}");
             }
+
+            _currentCoordinates.Add(new PlayerCoordinate
+            {
+                TimeSinceStart = Time.unscaledTime - _timerRef,
+                Position = transform.position,
+                Rotation = transform.rotation.eulerAngles.z
+            });
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            // Player reached finish line
             if (collision.CompareTag("FinishLine"))
             {
                 _canMove = false;
                 RaceManager.Instance.EndRace();
+                SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, _currentCoordinates);
             }
         }
 
