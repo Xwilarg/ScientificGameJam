@@ -28,7 +28,7 @@ namespace ScientificGameJam.PowerUp
 
         public void AddPowerup(int index, string name)
         {
-            _powers[index] = AvailablePowerUps.FirstOrDefault(x => x.name == name);
+            _powers[index] = AvailablePowerUps.FirstOrDefault(x => x.Title == name);
         }
 
         public void RemovePowerup(int index)
@@ -38,7 +38,7 @@ namespace ScientificGameJam.PowerUp
 
         public bool ContainsPowerup(PowerupInfo info)
         {
-            return _powers.Any(x => x.name == info.name);
+            return _powers.Any(x => x.Title == info.Title);
         }
 
         public void ClearPowerups()
