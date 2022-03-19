@@ -70,7 +70,7 @@ namespace ScientificGameJam.PowerUp
                     ((RectTransform)pu.transform).anchoredPosition = new Vector2(0, yPos);
 
                     pu.GetComponent<Image>().sprite = power.Image;
-                    pu.GetComponent<PUDragHandler>().powerUpName = power.name;
+                    pu.GetComponent<PUDragHandler>().powerUpName = power.Title;
 
                     _instanciated.Add(pu);
 
@@ -87,6 +87,14 @@ namespace ScientificGameJam.PowerUp
         public void AddPowerup(int index, string name)
         {
             EquippedPowerUps[index] = AvailablePowerUps.FirstOrDefault(x => x.Title == name);
+
+            foreach(var power in AvailablePowerUps)
+            {
+                UnityEngine.Debug.Log(power.Title);
+                UnityEngine.Debug.Log(name);
+                UnityEngine.Debug.Log(power.Title == name);
+            }
+            
         }
 
         public void RemovePowerup(int index)
