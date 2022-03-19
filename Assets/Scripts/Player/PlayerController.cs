@@ -4,6 +4,7 @@ using ScientificGameJam.SO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace ScientificGameJam.Player
 {
@@ -108,6 +109,11 @@ namespace ScientificGameJam.Player
             var mov = value.ReadValue<Vector2>();
             _verSpeed = mov.y * _info.Acceleration;
             _rot = mov.x;
+        }
+
+        public void OnRestart(InputAction.CallbackContext _)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
