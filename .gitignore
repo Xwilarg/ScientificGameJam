@@ -2,6 +2,9 @@
 /[Aa]ssets/TextMesh Pro.meta
 /[Aa]ssets/Plugins/*.dll
 /[Aa]ssets/Plugins/*.dll.meta
+/Packages/**
+!/Packages/manifest.json
+!/Packages/packages-lock.json
 
 .vsconfig
 
