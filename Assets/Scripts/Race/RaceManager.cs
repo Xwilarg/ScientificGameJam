@@ -56,7 +56,6 @@ namespace ScientificGameJam.Race
 
         private void Start()
         {
-            StartRace();
         }
 
         private void Update()

@@ -45,26 +45,45 @@ namespace ScientificGameJam.PowerUp
 
         public void Start()
         {
-            float yPos = -containerPadding;
             puPrefabHeight = puPrefab.GetComponent<RectTransform>().sizeDelta.y;
 
-            foreach (var power in AvailablePowerUps)
-            {
-                GameObject pu = Instantiate(puPrefab, puContainer.transform);
-                pu.transform.localPosition = new Vector2(0, yPos);
-
-                pu.GetComponent<Image>().sprite = power.Image;
-                pu.GetComponent<PUDragHandler>().powerUpName = power.name;
-
-                RectTransform rect = pu.GetComponent<RectTransform>();
-                rect.anchorMin = new Vector2(0.5f, 1f);
-                rect.anchorMax = new Vector2(0.5f, 1f);
-                rect.pivot = new Vector2(0.5f, 1f);
-
-                yPos -= containerPadding + puPrefabHeight;
-            }
-            _baseContainer.SetActive(false);
+            ToggleDisplay(true);
         }
+
+        private List<GameObject> _instanciated = new List<GameObject>();
+        public void ToggleDisplay(bool status)
+        {
+            _baseContainer.SetActive(status);
+
+            if (status)
+            {
+                foreach (var go in _instanciated)
+                {
+                    Destroy(go);
+                }
+                _instanciated.Clear();
+
+                float yPos = -containerPadding;
+                foreach (var power in AvailablePowerUps)
+                {
+                    GameObject pu = Instantiate(puPrefab, puContainer.transform);
+                    pu.transform.localPosition = new Vector2(0, yPos);
+
+                    pu.GetComponent<Image>().sprite = power.Image;
+                    pu.GetComponent<PUDragHandler>().powerUpName = power.name;
+
+                    _instanciated.Add(pu);
+
+                    RectTransform rect = pu.GetComponent<RectTransform>();
+                    rect.anchorMin = new Vector2(0.5f, 1f);
+                    rect.anchorMax = new Vector2(0.5f, 1f);
+                    rect.pivot = new Vector2(0.5f, 1f);
+
+                    yPos -= containerPadding + puPrefabHeight;
+                }
+            }
+        }
+
         public void AddPowerup(int index, string name)
         {
             EquippedPowerUps[index] = AvailablePowerUps.FirstOrDefault(x => x.Title == name);
