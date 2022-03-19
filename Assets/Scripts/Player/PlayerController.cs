@@ -13,6 +13,9 @@ namespace ScientificGameJam.Player
         [SerializeField]
         private PlayerInfo _info;
 
+        [SerializeField]
+        private Ghost _ghost;
+
         private Rigidbody2D _rb;
         private float _verSpeed;
         private float _rot;
@@ -30,17 +33,29 @@ namespace ScientificGameJam.Player
                 {
                     _rb.velocity = Vector3.zero;
                 }
-                else // Race started
-                {
-                    _timerRef = Time.unscaledTime;
-                }
                 _canMove = value;
+            }
+        }
+
+        public void StartRace()
+        {
+            _timerRef = Time.unscaledTime;
+            CanMove = true;
+            if (SaveLoad.Instance.HaveBestTime)
+            {
+                _ghost.gameObject.SetActive(true);
+                _ghost.LoadData();
             }
         }
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
+        }
+
+        private void Start()
+        {
+            _ghost.gameObject.SetActive(false);
         }
 
         private void FixedUpdate()
@@ -77,7 +92,7 @@ namespace ScientificGameJam.Player
             // Player reached finish line
             if (collision.CompareTag("FinishLine"))
             {
-                _canMove = false;
+                _canMove = false; // Not using setter so we don't touch the rb
                 RaceManager.Instance.EndRace();
                 SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, _currentCoordinates);
             }
