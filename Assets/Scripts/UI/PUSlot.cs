@@ -1,16 +1,10 @@
-using ScientificGameJam.PowerUps;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace ScientificGameJam.UI
 {
     public class PUSlot : MonoBehaviour, IDropHandler, IPointerDownHandler
     {
-        public PowerUpManager powerUpManager;
-
         private GameObject powerUp;
 
         public void OnDrop(PointerEventData eventData)
