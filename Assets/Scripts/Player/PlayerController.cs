@@ -1,11 +1,13 @@
 using ScientificGameJam.Debug;
+using ScientificGameJam.PowerUp;
 using ScientificGameJam.Race;
 using ScientificGameJam.SaveData;
 using ScientificGameJam.SO;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace ScientificGameJam.Player
 {
@@ -28,6 +30,13 @@ namespace ScientificGameJam.Player
         private readonly List<PlayerCoordinate> _currentCoordinates = new List<PlayerCoordinate>();
         private float _timerRef;
 
+        private float _speedBoost;
+
+        public void GainSpeedBoost(float percentage)
+        {
+            _speedBoost = _info.MaxSpeed * percentage;
+        }
+
         // Allow/Disallow player controls
         private bool _canMove;
         public bool CanMove
@@ -47,6 +56,13 @@ namespace ScientificGameJam.Player
         private Vector2 _orPos;
         private float _orRot;
 
+        [SerializeField]
+        private GameObject _powerupContainer;
+        [SerializeField]
+        private Image _powerupImage;
+
+        public List<PowerupInfo> ActivePowerups { private set; get; } = new List<PowerupInfo>();
+
         public void StopRace()
         {
             transform.position = _orPos;
@@ -58,8 +74,23 @@ namespace ScientificGameJam.Player
             _ghosts.Clear();
         }
 
+        private void UpdatePowerupList()
+        {
+            if (ActivePowerups.Any())
+            {
+                _powerupContainer.SetActive(true);
+                _powerupImage.sprite = ActivePowerups[0].Image;
+            }
+            else
+            {
+                _powerupContainer.SetActive(false);
+            }
+        }
+
         public void StartRace()
         {
+            UpdatePowerupList();
+
             _currentCoordinates.Clear();
             _timerRef = Time.unscaledTime;
             CanMove = true;
@@ -79,6 +110,18 @@ namespace ScientificGameJam.Player
             _orRot = transform.rotation.eulerAngles.z;
         }
 
+        private void Update()
+        {
+            if (_speedBoost > 1f)
+            {
+                _speedBoost -= Time.deltaTime * _info.BoostReduce;
+                if (_speedBoost < 1f)
+                {
+                    _speedBoost = 1f;
+                }
+            }
+        }
+
         private void FixedUpdate()
         {
             if (CanMove)
@@ -91,7 +134,7 @@ namespace ScientificGameJam.Player
                     {
                         speed = _rb.velocity.magnitude * Vector2.Dot(_rb.velocity, transform.up) / Mathf.Abs(Vector2.Dot(_rb.velocity, transform.up));
                     }
-                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed);
+                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost;
                 }
 
                 transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
@@ -133,6 +176,16 @@ namespace ScientificGameJam.Player
             var mov = value.ReadValue<Vector2>();
             _verSpeed = mov.y * _info.Acceleration;
             _rot = mov.x;
+        }
+
+        public void OnAction(InputAction.CallbackContext value)
+        {
+            if (value.performed && ActivePowerups.Any())
+            {
+                PowerUpManager.Instance.TriggerPowerup(ActivePowerups[0], this);
+                ActivePowerups.RemoveAt(0);
+                UpdatePowerupList();
+            }
         }
     }
 }

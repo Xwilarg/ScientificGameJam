@@ -116,6 +116,7 @@ namespace ScientificGameJam.Race
                     }
                 }
             }
+            PowerUpManager.Instance.ClearPowerups();
         }
 
         private IEnumerator LaunchRaceCountdown()
@@ -128,16 +129,26 @@ namespace ScientificGameJam.Race
             _raceCountdown.text = "1";
             yield return new WaitForSeconds(1f);
             _raceCountdown.gameObject.SetActive(false);
-            _player.StartRace();
-            _didRaceStart = true;
 
+            _player.ActivePowerups.Clear();
             foreach (var power in PowerUpManager.Instance.EquippedPowerUps)
             {
+                if (power == null)
+                {
+                    continue;
+                }
                 if (power.IsPassive)
                 {
-                    PowerUpManager.Instance.TriggerPowerup(power);
+                    PowerUpManager.Instance.TriggerPowerup(power, _player);
+                }
+                else
+                {
+                    _player.ActivePowerups.Add(power);
                 }
             }
+
+            _player.StartRace();
+            _didRaceStart = true;
         }
 
         public void OnRestart(InputAction.CallbackContext input)

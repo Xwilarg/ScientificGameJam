@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using ScientificGameJam.SO;
 using System;
+using ScientificGameJam.Player;
+using System.Linq;
 
 namespace ScientificGameJam.PowerUp
 {
@@ -23,7 +25,7 @@ namespace ScientificGameJam.PowerUp
         [Header("Lists")]
         [SerializeField] private PowerupInfo[] _powers;
         public List<PowerupInfo> AvailablePowerUps { private set; get; } = new List<PowerupInfo>();
-        public List<PowerupInfo> EquippedPowerUps { private set; get; } = new List<PowerupInfo>();
+        public PowerupInfo[] EquippedPowerUps { private set; get; } = new PowerupInfo[3];
 
 
         public void Awake()
@@ -35,6 +37,21 @@ namespace ScientificGameJam.PowerUp
             {
                 AvailablePowerUps.Add(power);
             }
+        }
+
+        public void AddPowerup(int index, string name)
+        {
+            _powers[index] = AvailablePowerUps.FirstOrDefault(x => x.name == name);
+        }
+
+        public void RemovePowerup(int index)
+        {
+            _powers[index] = null;
+        }
+
+        public bool ContainsPowerup(PowerupInfo info)
+        {
+            return _powers.Any(x => x.name == info.name);
         }
 
         public void Start()
@@ -65,6 +82,7 @@ namespace ScientificGameJam.PowerUp
                     break;
 
                 case PowerupEffect.SpeedBoost:
+                    player.GainSpeedBoost(float.Parse(info.Argument));
                     break;
 
                 default:
