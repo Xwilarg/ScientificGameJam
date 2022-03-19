@@ -118,7 +118,7 @@ namespace ScientificGameJam.Player
             {
                 _canMove = false; // Not using setter so we don't touch the rb
                 RaceManager.Instance.EndRace();
-                SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, _currentCoordinates);
+                SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, new List<PlayerCoordinate>(_currentCoordinates));
             }
         }
 
