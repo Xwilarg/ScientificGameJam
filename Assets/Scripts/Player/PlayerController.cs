@@ -60,6 +60,7 @@ namespace ScientificGameJam.Player
 
         public void StartRace()
         {
+            _currentCoordinates.Clear();
             _timerRef = Time.unscaledTime;
             CanMove = true;
             if (SaveLoad.Instance.HaveBestTime)

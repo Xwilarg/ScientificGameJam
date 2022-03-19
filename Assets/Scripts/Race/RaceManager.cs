@@ -119,6 +119,7 @@ namespace ScientificGameJam.Race
 
         private IEnumerator LaunchRaceCountdown()
         {
+            _didRaceStart = false;
             _raceCountdown.text = "3";
             yield return new WaitForSeconds(1f);
             _raceCountdown.text = "2";
