@@ -133,6 +133,10 @@ namespace ScientificGameJam.Race
             _player.ActivePowerups.Clear();
             foreach (var power in PowerUpManager.Instance.EquippedPowerUps)
             {
+                if (power == null)
+                {
+                    continue;
+                }
                 if (power.IsPassive)
                 {
                     PowerUpManager.Instance.TriggerPowerup(power, _player);
