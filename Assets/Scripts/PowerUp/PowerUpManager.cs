@@ -20,6 +20,8 @@ namespace ScientificGameJam.PowerUp
         [Tooltip("Prefab of the UI_PowerUp")]
         public GameObject puPrefab;
         private float puPrefabHeight;
+        [SerializeField]
+        private GameObject _baseContainer;
 
         [Header("Parameters")]
         public int containerPadding;
@@ -61,6 +63,7 @@ namespace ScientificGameJam.PowerUp
 
                 yPos -= containerPadding + puPrefabHeight;
             }
+            _baseContainer.SetActive(false);
         }
         public void AddPowerup(int index, string name)
         {
