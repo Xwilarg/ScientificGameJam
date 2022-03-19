@@ -30,6 +30,13 @@ namespace ScientificGameJam.Player
         private readonly List<PlayerCoordinate> _currentCoordinates = new List<PlayerCoordinate>();
         private float _timerRef;
 
+        private float _speedBoost;
+
+        public void GainSpeedBoost(float percentage)
+        {
+            _speedBoost = _info.MaxSpeed * percentage;
+        }
+
         // Allow/Disallow player controls
         private bool _canMove;
         public bool CanMove
@@ -103,6 +110,18 @@ namespace ScientificGameJam.Player
             _orRot = transform.rotation.eulerAngles.z;
         }
 
+        private void Update()
+        {
+            if (_speedBoost > 1f)
+            {
+                _speedBoost -= Time.deltaTime * _info.BoostReduce;
+                if (_speedBoost < 1f)
+                {
+                    _speedBoost = 1f;
+                }
+            }
+        }
+
         private void FixedUpdate()
         {
             if (CanMove)
@@ -115,7 +134,7 @@ namespace ScientificGameJam.Player
                     {
                         speed = _rb.velocity.magnitude * Vector2.Dot(_rb.velocity, transform.up) / Mathf.Abs(Vector2.Dot(_rb.velocity, transform.up));
                     }
-                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed);
+                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost;
                 }
 
                 transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);

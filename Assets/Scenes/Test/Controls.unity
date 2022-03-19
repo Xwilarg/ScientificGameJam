@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _powers:
-  - {fileID: 11400000, guid: aee47a3838249d34c9a11e0ea6b50d47, type: 2}
+  - {fileID: 11400000, guid: 5e5c40e9d4a79ed40a0ba4bbd42d54ad, type: 2}
 --- !u!1 &467271570
 GameObject:
   m_ObjectHideFlags: 0

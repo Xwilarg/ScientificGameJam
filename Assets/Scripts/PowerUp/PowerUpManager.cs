@@ -25,9 +25,9 @@ namespace ScientificGameJam.PowerUp
             }
         }
 
-        public void AddPowerup(int index, PowerupInfo info)
+        public void AddPowerup(int index, string name)
         {
-            _powers[index] = info;
+            _powers[index] = AvailablePowerUps.FirstOrDefault(x => x.name == name);
         }
 
         public void RemovePowerup(int index)
@@ -57,6 +57,7 @@ namespace ScientificGameJam.PowerUp
                     break;
 
                 case PowerupEffect.SpeedBoost:
+                    player.GainSpeedBoost(float.Parse(info.Argument));
                     break;
 
                 default:

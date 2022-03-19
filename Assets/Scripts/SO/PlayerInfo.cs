@@ -16,5 +16,7 @@ namespace ScientificGameJam.SO
         [Tooltip("Rotation speed")]
         [Range(0f, 1f)]
         public float TorqueMultiplicator = .5f;
+
+        public float BoostReduce;
     }
 }
