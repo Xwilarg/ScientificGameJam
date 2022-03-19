@@ -34,7 +34,7 @@ namespace ScientificGameJam.Player
 
         public void GainSpeedBoost(float percentage)
         {
-            _speedBoost = _info.MaxSpeed * percentage;
+            _speedBoost = percentage;
         }
 
         // Allow/Disallow player controls
@@ -89,6 +89,8 @@ namespace ScientificGameJam.Player
 
         public void StartRace()
         {
+            _speedBoost = 1f;
+
             UpdatePowerupList();
 
             _currentCoordinates.Clear();

@@ -23,6 +23,7 @@ namespace ScientificGameJam.PowerUp
             {
                 AvailablePowerUps.Add(power);
             }
+            EquippedPowerUps[0] = AvailablePowerUps[0];
         }
 
         public void AddPowerup(int index, string name)
