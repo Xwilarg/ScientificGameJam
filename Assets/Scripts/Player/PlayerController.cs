@@ -34,7 +34,7 @@ namespace ScientificGameJam.Player
 
         public void GainSpeedBoost(float percentage)
         {
-            _speedBoost = _info.MaxSpeed * percentage;
+            _speedBoost = percentage;
         }
 
         // Allow/Disallow player controls
@@ -63,6 +63,13 @@ namespace ScientificGameJam.Player
 
         public List<PowerupInfo> ActivePowerups { private set; get; } = new List<PowerupInfo>();
 
+        private int _nextId;
+        [SerializeField]
+        private int _checkpointCount;
+
+        [SerializeField]
+        private int _remainingLaps;
+
         public void StopRace()
         {
             transform.position = _orPos;
@@ -89,6 +96,8 @@ namespace ScientificGameJam.Player
 
         public void StartRace()
         {
+            _speedBoost = 1f;
+
             UpdatePowerupList();
 
             _currentCoordinates.Clear();
@@ -150,18 +159,30 @@ namespace ScientificGameJam.Player
 
             if (DebugManager.Instance != null)
             {
-                DebugManager.Instance.UpdateDebugText($"Speed: {_rb.velocity.magnitude:0.00}");
+                DebugManager.Instance.UpdateDebugText($"Speed: {_rb.velocity.magnitude:0.00}\nNext checkpoint: {_nextId}\nLaps remaining: {_remainingLaps}");
             }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // Player reached finish line
-            if (collision.CompareTag("FinishLine"))
+            if (collision.CompareTag("FinishLine") && _nextId == _checkpointCount)
             {
-                _canMove = false; // Not using setter so we don't touch the rb
-                RaceManager.Instance.EndRace();
-                SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, new List<PlayerCoordinate>(_currentCoordinates));
+                if (_remainingLaps > 0)
+                {
+                    _remainingLaps--;
+                    _nextId = 0;
+                }
+                else
+                {
+                    _canMove = false; // Not using setter so we don't touch the rb
+                    RaceManager.Instance.EndRace();
+                    SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, new List<PlayerCoordinate>(_currentCoordinates));
+                }
+            }
+            else if (collision.CompareTag("Checkpoint") && _nextId == collision.gameObject.GetComponent<Checkpoint>().Id)
+            {
+                _nextId++;
             }
         }
 

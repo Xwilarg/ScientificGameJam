@@ -39,6 +39,7 @@ namespace ScientificGameJam.PowerUp
             {
                 AvailablePowerUps.Add(power);
             }
+            EquippedPowerUps[0] = AvailablePowerUps[0];
         }
 
         public void Start()
@@ -74,7 +75,15 @@ namespace ScientificGameJam.PowerUp
 
         public bool ContainsPowerup(string name)
         {
-            return _powers.Any(x => x.Title == name);
+            return _powers.Any(x => x.Title == info.Title);
+        }
+
+        public void ClearPowerups()
+        {
+            for (int i = 0; i < _powers.Length; i++)
+            {
+                _powers[i] = null;
+            }
         }
 
         public void TriggerPowerup(PowerupInfo info)
