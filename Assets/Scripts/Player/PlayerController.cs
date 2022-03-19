@@ -65,9 +65,11 @@ namespace ScientificGameJam.Player
 
         private int _nextId;
         [SerializeField]
+        private int _checkpointCountRef;
         private int _checkpointCount;
 
         [SerializeField]
+        private int _remainingLapsRef;
         private int _remainingLaps;
 
         public void StopRace()
@@ -97,6 +99,8 @@ namespace ScientificGameJam.Player
         public void StartRace()
         {
             _speedBoost = 1f;
+            _remainingLaps = _remainingLapsRef;
+            _checkpointCount = _checkpointCountRef;
 
             UpdatePowerupList();
 
