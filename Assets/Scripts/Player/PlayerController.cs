@@ -166,7 +166,7 @@ namespace ScientificGameJam.Player
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // Player reached finish line
-            if (collision.CompareTag("FinishLine") && _nextId == _checkpointCount)
+            if (collision.CompareTag("FinishLine") && _nextId == _checkpointCount - 1)
             {
                 if (_remainingLaps > 0)
                 {
