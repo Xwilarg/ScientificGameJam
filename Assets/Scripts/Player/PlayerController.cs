@@ -22,7 +22,11 @@ namespace ScientificGameJam.Player
 
         private void FixedUpdate()
         {
-            _rb.AddForce(_info.SpeedMultiplicator * _verSpeed * transform.up);
+            // If we are accelerating/descelerating
+            if (Mathf.Abs(_verSpeed) > 0f)
+            {
+                _rb.velocity = _info.SpeedMultiplicator * _verSpeed * transform.up;
+            }
 
             transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
 
