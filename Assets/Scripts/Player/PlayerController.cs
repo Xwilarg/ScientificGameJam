@@ -1,3 +1,4 @@
+using ScientificGameJam.Debug;
 using ScientificGameJam.SO;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,6 +25,8 @@ namespace ScientificGameJam.Player
             _rb.AddForce(_info.SpeedMultiplicator * _verSpeed * transform.up);
 
             transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
+
+            DebugManager.Instance.UpdateDebugText($"Speed: {_rb.velocity.magnitude:0.00}");
         }
 
         public void OnMovement(InputAction.CallbackContext value)
