@@ -67,7 +67,7 @@ namespace ScientificGameJam.PowerUp
                 foreach (var power in AvailablePowerUps)
                 {
                     GameObject pu = Instantiate(puPrefab, puContainer.transform);
-                    pu.transform.localPosition = new Vector2(0, yPos);
+                    ((RectTransform)pu.transform).anchoredPosition = Vector2.right * yPos;
 
                     pu.GetComponent<Image>().sprite = power.Image;
                     pu.GetComponent<PUDragHandler>().powerUpName = power.name;
