@@ -1,19 +1,23 @@
+using ScientificGameJam.PowerUps;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpManager : MonoBehaviour
+namespace ScientificGameJam.UI
 {
-    private List<PowerUp> powers;
-
-    public List<PowerUp> GetPowerUps()
+    public class PowerUpManager : MonoBehaviour
     {
-        return powers;
-    }
+        private List<PowerUp> powers;
 
-    public void AddPowerUp(PowerUp power)
-    {
-        powers.Add(power);
-    }
+        public List<PowerUp> GetPowerUps()
+        {
+            return powers;
+        }
 
+        public void AddPowerUp(PowerUp power)
+        {
+            powers.Add(power);
+        }
+    }
 }
+
