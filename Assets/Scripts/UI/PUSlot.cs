@@ -9,6 +9,8 @@ namespace ScientificGameJam.UI
 {
     public class PUSlot : MonoBehaviour, IDropHandler, IPointerDownHandler
     {
+        public PowerUpManager powerUpManager;
+
         private GameObject powerUp;
 
         public void OnDrop(PointerEventData eventData)
@@ -16,8 +18,8 @@ namespace ScientificGameJam.UI
             if (eventData.pointerDrag != null)
             {
                 if (powerUp != null) Destroy(powerUp);
-                powerUp = Instantiate(eventData.pointerDrag, transform);
 
+                powerUp = Instantiate(eventData.pointerDrag, transform);
                 powerUp.transform.localPosition = Vector3.zero;
             }
         }
