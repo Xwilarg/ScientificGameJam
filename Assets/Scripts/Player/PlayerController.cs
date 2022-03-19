@@ -1,4 +1,5 @@
 using ScientificGameJam.Debug;
+using ScientificGameJam.Race;
 using ScientificGameJam.SaveData;
 using ScientificGameJam.SO;
 using System.Collections.Generic;
@@ -15,15 +16,19 @@ namespace ScientificGameJam.Player
         private PlayerInfo _info;
 
         [SerializeField]
-        private Ghost _ghost;
+        private GameObject _ghost;
 
+        // Base controls
         private Rigidbody2D _rb;
         private float _verSpeed;
         private float _rot;
 
+        // Saves and ghosts
+        private readonly List<Ghost> _ghosts = new List<Ghost>();
         private readonly List<PlayerCoordinate> _currentCoordinates = new List<PlayerCoordinate>();
         private float _timerRef;
 
+        // Allow/Disallow player controls
         private bool _canMove;
         public bool CanMove
         {
@@ -38,25 +43,40 @@ namespace ScientificGameJam.Player
             }
         }
 
+        // Original pos and rot used for reset
+        private Vector2 _orPos;
+        private float _orRot;
+
+        public void StopRace()
+        {
+            transform.position = _orPos;
+            transform.rotation = Quaternion.Euler(0f, 0f, _orRot);
+            foreach (var ghost in _ghosts)
+            {
+                Destroy(ghost.gameObject);
+            }
+            _ghosts.Clear();
+        }
+
         public void StartRace()
         {
+            _currentCoordinates.Clear();
             _timerRef = Time.unscaledTime;
             CanMove = true;
             if (SaveLoad.Instance.HaveBestTime)
             {
-                _ghost.gameObject.SetActive(true);
-                _ghost.LoadData();
+                var go = Instantiate(_ghost, transform.position, transform.rotation);
+                var ghost = go.GetComponent<Ghost>();
+                ghost.LoadData();
+                _ghosts.Add(ghost);
             }
         }
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
-        }
-
-        private void Start()
-        {
-            _ghost.gameObject.SetActive(false);
+            _orPos = transform.position;
+            _orRot = transform.rotation.eulerAngles.z;
         }
 
         private void FixedUpdate()
@@ -66,7 +86,11 @@ namespace ScientificGameJam.Player
                 // If we are accelerating/descelerating
                 if (Mathf.Abs(_verSpeed) > 0f)
                 {
-                    var speed = _rb.velocity.magnitude;
+                    float speed = 0f;
+                    if (_rb.velocity != Vector2.zero)
+                    {
+                        speed = _rb.velocity.magnitude * Vector2.Dot(_rb.velocity, transform.up) / Mathf.Abs(Vector2.Dot(_rb.velocity, transform.up));
+                    }
                     _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed);
                 }
 
@@ -94,7 +118,7 @@ namespace ScientificGameJam.Player
             {
                 _canMove = false; // Not using setter so we don't touch the rb
                 RaceManager.Instance.EndRace();
-                SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, _currentCoordinates);
+                SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, new List<PlayerCoordinate>(_currentCoordinates));
             }
         }
 
@@ -109,11 +133,6 @@ namespace ScientificGameJam.Player
             var mov = value.ReadValue<Vector2>();
             _verSpeed = mov.y * _info.Acceleration;
             _rot = mov.x;
-        }
-
-        public void OnRestart(InputAction.CallbackContext _)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

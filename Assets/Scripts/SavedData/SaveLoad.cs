@@ -85,6 +85,6 @@ namespace ScientificGameJam.SaveData
             }
         }
 
-        private string _pathTime = $"{Application.persistentDataPath}/time.bin";
+        private readonly string _pathTime = $"{Application.persistentDataPath}/time.bin";
     }
 }
