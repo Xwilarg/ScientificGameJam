@@ -10684,5 +10684,13 @@ PrefabInstance:
       propertyPath: _powerupContainer
       value: 
       objectReference: {fileID: 467271570}
+    - target: {fileID: 3051112491653658912, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
+      propertyPath: _remainingLapsRef
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051112491653658912, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
+      propertyPath: _checkpointCountRef
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eaf21c59640500f42aaa924f12aa6504, type: 3}
