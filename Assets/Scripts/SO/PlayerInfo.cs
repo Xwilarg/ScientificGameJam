@@ -7,9 +7,11 @@ namespace ScientificGameJam.SO
     {
         [Header("Configuration")]
 
-        [Range(0f, 20f)]
         [Tooltip("Speed of the player")]
-        public float SpeedMultiplicator = 5f;
+        [Range(0f, 2f)]
+        public float Acceleration = 1f;
+        [Range(0f, 20f)]
+        public float MaxSpeed;
 
         [Tooltip("Rotation speed")]
         [Range(0f, 1f)]

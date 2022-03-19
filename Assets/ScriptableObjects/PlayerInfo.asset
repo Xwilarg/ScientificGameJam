@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9069e88cb18dd374f8e6a5af2fa21de6, type: 3}
   m_Name: PlayerInfo
   m_EditorClassIdentifier: 
-  SpeedMultiplicator: 15
+  Acceleration: 0.25
+  MaxSpeed: 10
   TorqueMultiplicator: 0.25

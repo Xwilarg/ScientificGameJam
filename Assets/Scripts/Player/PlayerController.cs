@@ -53,7 +53,8 @@ namespace ScientificGameJam.Player
             // If we are accelerating/descelerating
             if (Mathf.Abs(_verSpeed) > 0f)
             {
-                _rb.velocity = _info.SpeedMultiplicator * _verSpeed * transform.up;
+                var speed = _rb.velocity.magnitude;
+                _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed);
             }
 
             transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
@@ -82,10 +83,16 @@ namespace ScientificGameJam.Player
             }
         }
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            // Slow down player if he touch a wall
+            _rb.velocity /= 2f;
+        }
+
         public void OnMovement(InputAction.CallbackContext value)
         {
             var mov = value.ReadValue<Vector2>();
-            _verSpeed = mov.y;
+            _verSpeed = mov.y * _info.Acceleration;
             _rot = mov.x;
         }
     }
