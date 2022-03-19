@@ -13,8 +13,12 @@ namespace ScientificGameJam.UI
             {
                 if (powerUp != null) Destroy(powerUp);
 
-                powerUp = Instantiate(eventData.pointerDrag, transform);
-                powerUp.transform.localPosition = Vector3.zero;
+                powerUp = Instantiate(eventData.pointerDrag, transform);            
+                RectTransform rect = powerUp.GetComponent<RectTransform>();
+                rect.anchorMin = new Vector2(0.5f, 0.5f);
+                rect.anchorMax = new Vector2(0.5f, 0.5f);
+                rect.pivot = new Vector2(0.5f, 0.5f);
+                rect.localPosition = Vector3.zero;
             }
         }
 
