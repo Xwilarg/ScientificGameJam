@@ -116,7 +116,7 @@ namespace ScientificGameJam.Race
                     }
                 }
             }
-            PowerUpManager.Instance.EquippedPowerUps.Clear();
+            PowerUpManager.Instance.ClearPowerups();
         }
 
         private IEnumerator LaunchRaceCountdown()

@@ -3,6 +3,7 @@ using UnityEngine;
 using ScientificGameJam.SO;
 using System;
 using ScientificGameJam.Player;
+using System.Linq;
 
 namespace ScientificGameJam.PowerUp
 {
@@ -11,7 +12,7 @@ namespace ScientificGameJam.PowerUp
         public static PowerUpManager Instance { get; private set; }
         [SerializeField] private PowerupInfo[] _powers;
         public List<PowerupInfo> AvailablePowerUps { private set; get; } = new List<PowerupInfo>();
-        public List<PowerupInfo> EquippedPowerUps { private set; get; } = new List<PowerupInfo>();
+        public PowerupInfo[] EquippedPowerUps { private set; get; } = new PowerupInfo[3];
 
         public void Awake()
         {
@@ -21,7 +22,29 @@ namespace ScientificGameJam.PowerUp
             foreach (var power in _powers)
             {
                 AvailablePowerUps.Add(power);
-                EquippedPowerUps.Add(power);
+            }
+        }
+
+        public void AddPowerup(int index, PowerupInfo info)
+        {
+            _powers[index] = info;
+        }
+
+        public void RemovePowerup(int index)
+        {
+            _powers[index] = null;
+        }
+
+        public bool ContainsPowerup(PowerupInfo info)
+        {
+            return _powers.Any(x => x.name == info.name);
+        }
+
+        public void ClearPowerups()
+        {
+            for (int i = 0; i < _powers.Length; i++)
+            {
+                _powers[i] = null;
             }
         }
 
