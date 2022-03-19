@@ -35,7 +35,8 @@ namespace ScientificGameJam.Player
 
         public void OnMovement(InputAction.CallbackContext value)
         {
-            var mov = value.ReadValue<Vector2>().normalized;
+            var mov = value.ReadValue<Vector2>();
+            UnityEngine.Debug.Log(mov);
             _verSpeed = mov.y;
             _rot = mov.x;
         }
