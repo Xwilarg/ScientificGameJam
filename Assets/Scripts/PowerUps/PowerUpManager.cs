@@ -13,8 +13,7 @@ namespace ScientificGameJam.UI
         public static PowerUpManager instance { get; private set; }
         [SerializeField] private List<PowerUp> powers;
         [SerializeField] private List<PowerUp> equippedPowerUps;
-
-
+        
         public List<PowerUp> GetPowerUps()
         {
             return powers;
