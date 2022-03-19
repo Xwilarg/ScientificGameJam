@@ -39,7 +39,6 @@ namespace ScientificGameJam.PowerUp
             {
                 AvailablePowerUps.Add(power);
             }
-            EquippedPowerUps[0] = AvailablePowerUps[0];
         }
 
         public void Start()
@@ -65,24 +64,24 @@ namespace ScientificGameJam.PowerUp
         }
         public void AddPowerup(int index, string name)
         {
-            _powers[index] = AvailablePowerUps.FirstOrDefault(x => x.Title == name);
+            EquippedPowerUps[index] = AvailablePowerUps.FirstOrDefault(x => x.Title == name);
         }
 
         public void RemovePowerup(int index)
         {
-            _powers[index] = null;
+            EquippedPowerUps[index] = null;
         }
 
         public bool ContainsPowerup(string name)
         {
-            return _powers.Any(x => x.Title == info.Title);
+            return EquippedPowerUps.Any(x => x?.Title == name);
         }
 
         public void ClearPowerups()
         {
             for (int i = 0; i < _powers.Length; i++)
             {
-                _powers[i] = null;
+                EquippedPowerUps[i] = null;
             }
         }
 

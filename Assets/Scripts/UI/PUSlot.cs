@@ -16,7 +16,6 @@ namespace ScientificGameJam.UI
             if (eventData.pointerDrag != null)
             {
                 PUDragHandler pu = eventData.pointerDrag.GetComponent<PUDragHandler>();
-                UnityEngine.Debug.Log(puManager.ContainsPowerup("shit"));
 
                 if (!puManager.ContainsPowerup(pu.powerUpName))
                 {
