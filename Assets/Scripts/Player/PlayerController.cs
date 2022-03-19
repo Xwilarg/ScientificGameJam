@@ -65,7 +65,6 @@ namespace ScientificGameJam.Player
 
         private int _nextId;
         [SerializeField]
-        private int _checkpointCountRef;
         private int _checkpointCount;
 
         [SerializeField]
@@ -76,7 +75,7 @@ namespace ScientificGameJam.Player
         {
             _speedBoost = 1f;
             _remainingLaps = _remainingLapsRef;
-            _checkpointCount = _checkpointCountRef;
+            _nextId = 0;
             transform.position = _orPos;
             transform.rotation = Quaternion.Euler(0f, 0f, _orRot);
             foreach (var ghost in _ghosts)
