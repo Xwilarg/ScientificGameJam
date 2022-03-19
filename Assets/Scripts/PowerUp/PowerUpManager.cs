@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ScientificGameJam.SO;
 using System;
+using ScientificGameJam.Player;
 
 namespace ScientificGameJam.PowerUp
 {
@@ -23,7 +24,7 @@ namespace ScientificGameJam.PowerUp
             }
         }
 
-        public void TriggerPowerup(PowerupInfo info)
+        public void TriggerPowerup(PowerupInfo info, PlayerController player)
         {
             switch (info.Effect)
             {

@@ -1,11 +1,13 @@
 using ScientificGameJam.Debug;
+using ScientificGameJam.PowerUp;
 using ScientificGameJam.Race;
 using ScientificGameJam.SaveData;
 using ScientificGameJam.SO;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace ScientificGameJam.Player
 {
@@ -47,6 +49,13 @@ namespace ScientificGameJam.Player
         private Vector2 _orPos;
         private float _orRot;
 
+        [SerializeField]
+        private GameObject _powerupContainer;
+        [SerializeField]
+        private Image _powerupImage;
+
+        public List<PowerupInfo> ActivePowerups { private set; get; } = new List<PowerupInfo>();
+
         public void StopRace()
         {
             transform.position = _orPos;
@@ -58,8 +67,23 @@ namespace ScientificGameJam.Player
             _ghosts.Clear();
         }
 
+        private void UpdatePowerupList()
+        {
+            if (ActivePowerups.Any())
+            {
+                _powerupContainer.SetActive(true);
+                _powerupImage.sprite = ActivePowerups[0].Image;
+            }
+            else
+            {
+                _powerupContainer.SetActive(false);
+            }
+        }
+
         public void StartRace()
         {
+            UpdatePowerupList();
+
             _currentCoordinates.Clear();
             _timerRef = Time.unscaledTime;
             CanMove = true;
@@ -133,6 +157,16 @@ namespace ScientificGameJam.Player
             var mov = value.ReadValue<Vector2>();
             _verSpeed = mov.y * _info.Acceleration;
             _rot = mov.x;
+        }
+
+        public void OnAction(InputAction.CallbackContext value)
+        {
+            if (value.performed && ActivePowerups.Any())
+            {
+                PowerUpManager.Instance.TriggerPowerup(ActivePowerups[0], this);
+                ActivePowerups.RemoveAt(0);
+                UpdatePowerupList();
+            }
         }
     }
 }

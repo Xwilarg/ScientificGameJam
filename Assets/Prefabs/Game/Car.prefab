@@ -175,11 +175,19 @@ MonoBehaviour:
     m_ActionId: 598531cc-cbbf-4723-9557-7b80e806b226
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c293a6bd-b099-46f6-83e5-58becc0c0fae
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ScientificGameJam.Race.RaceManager, Assembly-CSharp
+        m_MethodName: OnRestart
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a9fd94e9-30f4-48dc-a4db-489d5fb9522e
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -222,6 +230,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ee3201e2-be08-4941-98a6-a95c65f0a44e
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3051112491653658912}
+        m_TargetAssemblyTypeName: ScientificGameJam.Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7b8f5823-3309-4109-bc13-56af113a41b2
+    m_ActionName: Player/Effect[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -240,3 +264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _info: {fileID: 11400000, guid: 5748cac16b6d19b4ebdfdfd005dc9329, type: 2}
+  _ghost: {fileID: 7495787325766155229, guid: 46be44935d3405d45aa06bb8993a1cbb, type: 3}
+  _powerupContainer: {fileID: 0}
+  _powerupImage: {fileID: 0}
