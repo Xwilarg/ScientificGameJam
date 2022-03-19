@@ -104,7 +104,7 @@ namespace ScientificGameJam.PowerUp
 
         public bool ContainsPowerup(string name)
         {
-            return EquippedPowerUps.Any(x => x?.Title == name);
+            return EquippedPowerUps.Any(x => x != null && x.Title == name);
         }
 
         public void ClearPowerups()
