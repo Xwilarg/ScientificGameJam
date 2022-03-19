@@ -21,6 +21,7 @@ namespace ScientificGameJam.PowerUp
             foreach (var power in _powers)
             {
                 AvailablePowerUps.Add(power);
+                EquippedPowerUps.Add(power);
             }
         }
 
