@@ -55,6 +55,15 @@ namespace ScientificGameJam.Player
             }
         }
 
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("FinishLine"))
+            {
+                _canMove = false;
+                RaceManager.Instance.EndRace();
+            }
+        }
+
         public void OnMovement(InputAction.CallbackContext value)
         {
             var mov = value.ReadValue<Vector2>();
