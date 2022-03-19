@@ -42,11 +42,7 @@ namespace ScientificGameJam.SaveData
                             Rotation = angle
                         });
                     }
-                }
-                else
-                {
-                    BestTime = -1f;
-                    Coordinates = new Dictionary<float, PlayerCoordinate>();
+                    Coordinates = coor;
                 }
             }
             else
@@ -57,7 +53,8 @@ namespace ScientificGameJam.SaveData
 
         private void UpdateSavesTime()
         {
-            using FileStream file = new FileStream(_pathTime, FileMode.Open, FileAccess.Read);
+            UnityEngine.Debug.Log($"Saves updated at {_pathTime}");
+            using FileStream file = new FileStream(_pathTime, FileMode.OpenOrCreate, FileAccess.Write);
             using BinaryWriter writer = new BinaryWriter(file);
 
             writer.Write(BestTime);
@@ -72,8 +69,8 @@ namespace ScientificGameJam.SaveData
         }
 
         public bool HaveBestTime => Coordinates.Any();
-        public float BestTime { private set; get; }
-        public IReadOnlyDictionary<float, PlayerCoordinate> Coordinates { private set; get; }
+        public float BestTime { private set; get; } = -1f;
+        public IReadOnlyDictionary<float, PlayerCoordinate> Coordinates { private set; get; } = new Dictionary<float, PlayerCoordinate>();
         public void UpdateBestTime(float timer, List<PlayerCoordinate> coordinates)
         {
             if (!HaveBestTime || timer < BestTime)
