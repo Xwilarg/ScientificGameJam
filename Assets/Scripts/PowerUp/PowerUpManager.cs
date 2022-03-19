@@ -4,6 +4,8 @@ using ScientificGameJam.SO;
 using System;
 using ScientificGameJam.Player;
 using System.Linq;
+using ScientificGameJam.UI;
+using UnityEngine.UI;
 
 namespace ScientificGameJam.PowerUp
 {
@@ -39,21 +41,6 @@ namespace ScientificGameJam.PowerUp
             }
         }
 
-        public void AddPowerup(int index, string name)
-        {
-            _powers[index] = AvailablePowerUps.FirstOrDefault(x => x.name == name);
-        }
-
-        public void RemovePowerup(int index)
-        {
-            _powers[index] = null;
-        }
-
-        public bool ContainsPowerup(PowerupInfo info)
-        {
-            return _powers.Any(x => x.name == info.name);
-        }
-
         public void Start()
         {
             float yPos = -containerPadding;
@@ -64,6 +51,9 @@ namespace ScientificGameJam.PowerUp
                 GameObject pu = Instantiate(puPrefab, puContainer.transform);
                 pu.transform.localPosition = new Vector2(0, yPos);
 
+                pu.GetComponent<Image>().sprite = power.Image;
+                pu.GetComponent<PUDragHandler>().powerUpName = power.name;
+
                 RectTransform rect = pu.GetComponent<RectTransform>();
                 rect.anchorMin = new Vector2(0.5f, 1f);
                 rect.anchorMax = new Vector2(0.5f, 1f);
@@ -71,6 +61,20 @@ namespace ScientificGameJam.PowerUp
 
                 yPos -= containerPadding + puPrefabHeight;
             }
+        }
+        public void AddPowerup(int index, string name)
+        {
+            _powers[index] = AvailablePowerUps.FirstOrDefault(x => x.name == name);
+        }
+
+        public void RemovePowerup(int index)
+        {
+            _powers[index] = null;
+        }
+
+        public bool ContainsPowerup(string name)
+        {
+            return _powers.Any(x => x.name == name);
         }
 
         public void TriggerPowerup(PowerupInfo info)
@@ -82,7 +86,7 @@ namespace ScientificGameJam.PowerUp
                     break;
 
                 case PowerupEffect.SpeedBoost:
-                    player.GainSpeedBoost(float.Parse(info.Argument));
+                    //player.GainSpeedBoost(float.Parse(info.Argument));
                     break;
 
                 default:

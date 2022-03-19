@@ -116,7 +116,7 @@ namespace ScientificGameJam.Race
                     }
                 }
             }
-            PowerUpManager.Instance.ClearPowerups();
+            //PowerUpManager.Instance.ClearPowerups();
         }
 
         private IEnumerator LaunchRaceCountdown()
@@ -139,7 +139,7 @@ namespace ScientificGameJam.Race
                 }
                 if (power.IsPassive)
                 {
-                    PowerUpManager.Instance.TriggerPowerup(power, _player);
+                    //PowerUpManager.Instance.TriggerPowerup(power, _player);
                 }
                 else
                 {
