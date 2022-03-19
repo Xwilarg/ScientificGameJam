@@ -11,13 +11,20 @@ namespace ScientificGameJam.UI
     public class PowerUpManager : MonoBehaviour
     {
         public static PowerUpManager instance { get; private set; }
-        private List<PowerUp> powers;
+        [SerializeField] private List<PowerUp> powers;
+        [SerializeField] private List<PowerUp> equippedPowerUps;
+
 
         public List<PowerUp> GetPowerUps()
         {
             return powers;
         }
 
+        public List<PowerUp> GetEquippedPowerUps()
+        {
+            return equippedPowerUps;
+        }
+        
         public void AddPowerUp(PowerUp power)
         {
             powers.Add(power);

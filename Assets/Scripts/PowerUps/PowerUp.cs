@@ -16,6 +16,8 @@ namespace ScientificGameJam.PowerUps
 
         //Wether the power-up is passive or activates with a button
         public bool passive;
+
+        public abstract void doEffect();
     }
 }
 
