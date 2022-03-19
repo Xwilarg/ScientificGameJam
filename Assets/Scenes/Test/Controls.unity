@@ -8687,6 +8687,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1486833536}
     m_Modifications:
+    - target: {fileID: 5881127223089763904, guid: 786bef41f9951f44da0a17d398b5e4ae, type: 3}
+      propertyPath: puManager
+      value: 
+      objectReference: {fileID: 141906616}
+    - target: {fileID: 5881127223350666817, guid: 786bef41f9951f44da0a17d398b5e4ae, type: 3}
+      propertyPath: puManager
+      value: 
+      objectReference: {fileID: 141906616}
+    - target: {fileID: 5881127223452055655, guid: 786bef41f9951f44da0a17d398b5e4ae, type: 3}
+      propertyPath: puManager
+      value: 
+      objectReference: {fileID: 141906616}
     - target: {fileID: 7279234666123950706, guid: 786bef41f9951f44da0a17d398b5e4ae, type: 3}
       propertyPath: m_Name
       value: PU Slots
