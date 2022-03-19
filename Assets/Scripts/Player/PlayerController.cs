@@ -1,4 +1,5 @@
 using ScientificGameJam.Debug;
+using ScientificGameJam.Race;
 using ScientificGameJam.SaveData;
 using ScientificGameJam.SO;
 using System.Collections.Generic;
@@ -15,11 +16,12 @@ namespace ScientificGameJam.Player
         private PlayerInfo _info;
 
         [SerializeField]
-        private Ghost _ghost;
+        private GameObject _ghost;
 
         private Rigidbody2D _rb;
         private float _verSpeed;
         private float _rot;
+        private readonly List<Ghost> _ghosts = new List<Ghost>();
 
         private readonly List<PlayerCoordinate> _currentCoordinates = new List<PlayerCoordinate>();
         private float _timerRef;
@@ -38,25 +40,38 @@ namespace ScientificGameJam.Player
             }
         }
 
+        private Vector2 _orPos;
+        private float _orRot;
+
+        public void StopRace()
+        {
+            transform.position = _orPos;
+            transform.rotation = Quaternion.Euler(0f, 0f, _orRot);
+            foreach (var ghost in _ghosts)
+            {
+                Destroy(ghost);
+            }
+            _ghosts.Clear();
+        }
+
         public void StartRace()
         {
             _timerRef = Time.unscaledTime;
             CanMove = true;
             if (SaveLoad.Instance.HaveBestTime)
             {
-                _ghost.gameObject.SetActive(true);
-                _ghost.LoadData();
+                var go = Instantiate(_ghost, transform.position, transform.rotation);
+                var ghost = go.GetComponent<Ghost>();
+                ghost.LoadData();
+                _ghosts.Add(ghost);
             }
         }
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
-        }
-
-        private void Start()
-        {
-            _ghost.gameObject.SetActive(false);
+            _orPos = transform.position;
+            _orRot = transform.rotation.eulerAngles.z;
         }
 
         private void FixedUpdate()
@@ -109,11 +124,6 @@ namespace ScientificGameJam.Player
             var mov = value.ReadValue<Vector2>();
             _verSpeed = mov.y * _info.Acceleration;
             _rot = mov.x;
-        }
-
-        public void OnRestart(InputAction.CallbackContext _)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
