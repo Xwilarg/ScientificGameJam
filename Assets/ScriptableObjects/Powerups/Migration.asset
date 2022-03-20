@@ -18,4 +18,4 @@ MonoBehaviour:
   Image: {fileID: 21300000, guid: d4e47ab77a853bd43aada6ae54a37adf, type: 3}
   IsPassive: 1
   Argument: Migration
-  Effect: 1
+  Effect: 2
