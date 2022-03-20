@@ -1,3 +1,4 @@
+using ScientificGameJam.Translation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,11 +46,13 @@ public class MainMenu : MonoBehaviour
         {
             enButton.color = new Vector4(1, 1, 1, 0.5f);
             frButton.color = new Vector4(1, 1, 1, 1f);
+            Translate.Instance.CurrentLanguage = "french";
         }
         else
         {
             enButton.color = new Vector4(1, 1, 1, 1f);
             frButton.color = new Vector4(1, 1, 1, 0.5f);
+            Translate.Instance.CurrentLanguage = "english";
         }
     }
 }
