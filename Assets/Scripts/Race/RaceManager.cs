@@ -1,3 +1,4 @@
+using ScientificGameJam.Audio;
 using ScientificGameJam.Player;
 using ScientificGameJam.PowerUp;
 using ScientificGameJam.SaveData;
@@ -19,6 +20,7 @@ namespace ScientificGameJam.Race
         private void Awake()
         {
             Instance = this;
+            _source = GetComponent<AudioSource>();
         }
 
         [SerializeField]
@@ -55,6 +57,11 @@ namespace ScientificGameJam.Race
         [SerializeField]
         private Image[] _medals;
 
+        private AudioSource _source;
+
+        [SerializeField]
+        private AudioClip _bipLow, _bipHigh;
+
         public float RaceTimer { private set; get; }
         private bool _didRaceStart;
 
@@ -67,15 +74,24 @@ namespace ScientificGameJam.Race
             }
         }
 
+        public void Stop()
+        {
+            _player.StopRace();
+        }
+
         public void HideView()
         {
             _courseEndGo.SetActive(false);
             _playerCamera.gameObject.SetActive(false);
             _overviewCamera.gameObject.SetActive(true);
+
+            BGMManager.Instance.PlayPowerupSelect();
         }
 
         public void StartRace()
         {
+            BGMManager.Instance.PlayDuringRace();
+
             _courseEndGo.SetActive(false);
 
             // Set camera on player
@@ -139,14 +155,27 @@ namespace ScientificGameJam.Race
         {
             _didRaceStart = false;
             _raceCountdown.text = "3";
+            _source.PlayOneShot(_bipLow);
             yield return new WaitForSeconds(1f);
             _raceCountdown.text = "2";
+            _source.PlayOneShot(_bipLow);
             yield return new WaitForSeconds(1f);
             _raceCountdown.text = "1";
+            _source.PlayOneShot(_bipLow);
             yield return new WaitForSeconds(1f);
+            _source.PlayOneShot(_bipHigh);
             _raceCountdown.gameObject.SetActive(false);
 
+            RefreshPowerups();
+
+            _player.StartRace();
+            _didRaceStart = true;
+        }
+
+        private void RefreshPowerups()
+        {
             _player.ActivePowerups.Clear();
+            _player.PassiveBoosts.Clear();
             foreach (var power in PowerUpManager.Instance.EquippedPowerUps)
             {
                 if (power == null)
@@ -155,16 +184,17 @@ namespace ScientificGameJam.Race
                 }
                 if (power.IsPassive)
                 {
-                    PowerUpManager.Instance.TriggerPowerup(power, _player);
+                    // PowerUpManager.Instance.TriggerPowerup(power, _player);
+                    if (power.Effect == PowerupEffect.ZoneBoost)
+                    {
+                        _player.PassiveBoosts.Add(power.Argument);
+                    }
                 }
                 else
                 {
                     _player.ActivePowerups.Add(power);
                 }
             }
-
-            _player.StartRace();
-            _didRaceStart = true;
         }
 
         public void OnRestart(InputAction.CallbackContext input)
@@ -172,6 +202,7 @@ namespace ScientificGameJam.Race
             if (input.performed)
             {
                 _player.StopRace();
+                RefreshPowerups();
                 StartRace();
             }
         }

@@ -15,4 +15,4 @@ MonoBehaviour:
   Acceleration: 0.25
   MaxSpeed: 10
   TorqueMultiplicator: 0.25
-  BoostReduce: 0.5
+  BoostReduce: 0.2

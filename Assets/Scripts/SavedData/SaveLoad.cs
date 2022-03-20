@@ -28,6 +28,12 @@ namespace ScientificGameJam.SaveData
                     using BinaryReader reader = new BinaryReader(file);
                     BestTime = reader.ReadSingle();
 
+                    var checkpointsLength = reader.ReadInt32();
+                    var cpts = new List<float>();
+                    for (int i = 0; i < checkpointsLength; i++)
+                    {
+                        cpts.Add(reader.ReadSingle());
+                    }
                     var dictLength = reader.ReadInt32();
                     var coor = new List<PlayerCoordinate>();
                     for (int i = 0; i < dictLength; i++)
@@ -44,6 +50,7 @@ namespace ScientificGameJam.SaveData
                             Velocity = vel
                         });
                     }
+                    Checkpoints = cpts;
                     Coordinates = coor;
                 }
             }
@@ -60,6 +67,11 @@ namespace ScientificGameJam.SaveData
             using BinaryWriter writer = new BinaryWriter(file);
 
             writer.Write(BestTime);
+            writer.Write(Checkpoints.Count);
+            foreach (var elem in Checkpoints)
+            {
+                writer.Write(elem);
+            }
             writer.Write(Coordinates.Count);
             foreach (var elem in Coordinates)
             {
@@ -75,14 +87,18 @@ namespace ScientificGameJam.SaveData
         public bool HaveBestTime => Coordinates.Any();
         public float BestTime { private set; get; } = -1f;
         public IReadOnlyList<PlayerCoordinate> Coordinates { private set; get; } = new List<PlayerCoordinate>();
-        public void UpdateBestTime(float timer, List<PlayerCoordinate> coordinates)
+        public IReadOnlyList<float> Checkpoints { private set; get; } = new List<float>();
+        public bool UpdateBestTime(float timer, List<PlayerCoordinate> coordinates, List<float> checkpoints)
         {
             if (!HaveBestTime || timer < BestTime)
             {
                 BestTime = timer;
                 Coordinates = coordinates;
+                Checkpoints = checkpoints;
                 UpdateSavesTime();
+                return true;
             }
+            return false;
         }
 
         private readonly string _pathTime = $"{Application.persistentDataPath}/time.bin";

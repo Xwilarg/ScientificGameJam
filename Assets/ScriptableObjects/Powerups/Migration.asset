@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cff10df4a87f5244a3fa28f4172622f, type: 3}
-  m_Name: SpeedBoost
+  m_Name: Migration
   m_EditorClassIdentifier: 
-  Title: Speed Boost
-  Description: Gotta go fast
-  Image: {fileID: 21300000, guid: 43a1aa913dae5aa4281d1848cd2dd0d3, type: 3}
-  IsPassive: 0
-  Argument: 1.5
-  Effect: 1
+  Id: migrationName
+  DescriptionScience: migrationScience
+  DescriptionGame: migrationGame
+  Image: {fileID: 21300000, guid: d4e47ab77a853bd43aada6ae54a37adf, type: 3}
+  IsPassive: 1
+  Argument: Migration
+  Effect: 2

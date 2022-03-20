@@ -6,6 +6,7 @@ using ScientificGameJam.Player;
 using System.Linq;
 using ScientificGameJam.UI;
 using UnityEngine.UI;
+using ScientificGameJam.Translation;
 
 namespace ScientificGameJam.PowerUp
 {
@@ -36,10 +37,10 @@ namespace ScientificGameJam.PowerUp
         {
             Instance = this;
 
-            // Debug
-            foreach (var power in _powers)
+            // DEBUG
+            foreach (var p in _powers)
             {
-                AvailablePowerUps.Add(power);
+                AvailablePowerUps.Add(p);
             }
         }
 
@@ -48,6 +49,16 @@ namespace ScientificGameJam.PowerUp
             puPrefabHeight = puPrefab.GetComponent<RectTransform>().sizeDelta.y;
 
             ToggleDisplay(true);
+        }
+
+        public void GainPowerup()
+        {
+            var remainings = _powers.Where(x => !ContainsPowerup(x.Id)).ToArray();
+            if (remainings.Any())
+            {
+                var random = remainings[UnityEngine.Random.Range(0, remainings.Length)];
+                AvailablePowerUps.Add(random);
+            }
         }
 
         private List<GameObject> _instanciated = new List<GameObject>();
@@ -70,7 +81,7 @@ namespace ScientificGameJam.PowerUp
                     ((RectTransform)pu.transform).anchoredPosition = new Vector2(0, yPos);
 
                     pu.GetComponent<Image>().sprite = power.Image;
-                    pu.GetComponent<PUDragHandler>().powerUpName = power.Title;
+                    pu.GetComponent<PUDragHandler>().powerUpName = power.Id;
 
                     _instanciated.Add(pu);
 
@@ -86,7 +97,7 @@ namespace ScientificGameJam.PowerUp
 
         public void AddPowerup(int index, string name)
         {
-            EquippedPowerUps[index] = AvailablePowerUps.FirstOrDefault(x => x.Title == name);
+            EquippedPowerUps[index] = AvailablePowerUps.FirstOrDefault(x => x.Id == name);
         }
 
         public void RemovePowerup(int index)
@@ -96,7 +107,15 @@ namespace ScientificGameJam.PowerUp
 
         public bool ContainsPowerup(string name)
         {
-            return EquippedPowerUps.Any(x => x != null && x.Title == name);
+            return EquippedPowerUps.Any(x => x != null && x.Id == name);
+        }
+
+        public string GetPowerupDescription(string name)
+        {
+            var elem = _powers.First(x => x != null && x.Id == name);
+            var descGa = string.IsNullOrEmpty(elem.DescriptionGame) ? elem.DescriptionGame : Translate.Instance.Tr(elem.DescriptionGame);
+            var descSc = string.IsNullOrEmpty(elem.DescriptionScience) ? elem.DescriptionScience : Translate.Instance.Tr(elem.DescriptionScience);
+            return $"{descGa}\n\n{descSc}";
         }
 
         public void ClearPowerups()
