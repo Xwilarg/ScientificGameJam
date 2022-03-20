@@ -488,10 +488,6 @@ MonoBehaviour:
   _courseEndGo: {fileID: 1951280141}
   _timerEnd: {fileID: 1992663177}
   _msgEnd: {fileID: 589367005}
-  _medals:
-  - {fileID: 770543972}
-  - {fileID: 105279447}
-  - {fileID: 545305193}
 --- !u!114 &141906616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34994,10 +34990,10 @@ RectTransform:
   m_Father: {fileID: 1486833536}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 24, y: 17.286987}
-  m_SizeDelta: {x: 141.332, y: 65.713}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -25, y: 20}
+  m_SizeDelta: {x: 145, y: 65}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &387593690
 MonoBehaviour:
@@ -36958,7 +36954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
