@@ -266,6 +266,10 @@ namespace ScientificGameJam.Player
             else if (collision.CompareTag("ZoneBoost"))
             {
                 var modifier = collision.gameObject.GetComponent<Modifier>();
+                if (modifier.TargetTag == "")
+                {
+
+                }
                 if (modifier.GiveBoost)
                 {
                     if (PassiveBoosts.Contains(modifier.TargetTag))
