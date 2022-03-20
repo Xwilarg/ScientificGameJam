@@ -12,11 +12,16 @@ public class ParticlesTrails : MonoBehaviour
 
     private void Start()
     {
-        _playerController = FindObjectOfType<PlayerController>();
+        _playerController = transform.parent.GetComponent<PlayerController>();
     }
 
     private void OnParticleTrigger()
     {
+        if (_playerController == null)
+        {
+            return;
+        }
+
         ParticleSystem ps = GetComponent<ParticleSystem>();
             
         List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();
