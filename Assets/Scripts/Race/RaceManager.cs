@@ -24,6 +24,9 @@ namespace ScientificGameJam.Race
         }
 
         [SerializeField]
+        private Arrow[] _arrows;
+
+        [SerializeField]
         private LevelInfo _currentLevel;
 
         /// <summary>
@@ -149,6 +152,10 @@ namespace ScientificGameJam.Race
                 }
             }
             PowerUpManager.Instance.ClearPowerups();
+            foreach (var a in _arrows)
+            {
+                a.DisplayNormal();
+            }
         }
 
         private IEnumerator LaunchRaceCountdown()
@@ -193,6 +200,18 @@ namespace ScientificGameJam.Race
                 else
                 {
                     _player.ActivePowerups.Add(power);
+                }
+            }
+            var haveArrowPowerup = PowerUpManager.Instance.EquippedPowerUps.Any(x => x != null && x.Id == "durotaxieName");
+            foreach (var a in _arrows)
+            {
+                if (haveArrowPowerup)
+                {
+                    a.DisplayNormal();
+                }
+                else
+                {
+                    a.DisplayGrey();
                 }
             }
         }
