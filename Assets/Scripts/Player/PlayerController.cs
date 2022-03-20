@@ -3,8 +3,10 @@ using ScientificGameJam.PowerUp;
 using ScientificGameJam.Race;
 using ScientificGameJam.SaveData;
 using ScientificGameJam.SO;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -19,6 +21,9 @@ namespace ScientificGameJam.Player
 
         [SerializeField]
         private GameObject _ghost;
+
+        [SerializeField]
+        private TMP_Text _timerCheckpointDiff;
 
         // Base controls
         private Rigidbody2D _rb;
@@ -105,6 +110,7 @@ namespace ScientificGameJam.Player
 
             _currentCoordinates.Clear();
             _checkpointTimes.Clear();
+            _nextCheckpointId = 0;
             _timerRef = Time.unscaledTime;
             CanMove = true;
             if (SaveLoad.Instance.HaveBestTime)
@@ -175,10 +181,11 @@ namespace ScientificGameJam.Player
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // Player reached finish line
-            if (collision.CompareTag("FinishLine") && _nextId == _checkpointCount - 1)
+            if (collision.CompareTag("FinishLine") && _nextId == _checkpointCount)
             {
                 if (_remainingLaps > 0)
                 {
+                    DisplayDelay();
                     _remainingLaps--;
                     _nextId = 0;
                 }
@@ -193,14 +200,31 @@ namespace ScientificGameJam.Player
             }
             else if (collision.CompareTag("Checkpoint") && _nextId == collision.gameObject.GetComponent<Checkpoint>().Id)
             {
+                DisplayDelay();
                 _nextId++;
             }
         }
+        private int _nextCheckpointId = 0;
 
         public void DisplayDelay()
         {
             var timer = Time.unscaledTime - _timerRef;
-            _checkpointTimes.Add(Time.unscaledTime - _timerRef);
+            _checkpointTimes.Add(timer);
+            if (SaveLoad.Instance.HaveBestTime)
+            {
+                var diff = timer - SaveLoad.Instance.Checkpoints[_nextCheckpointId];
+                _timerCheckpointDiff.gameObject.SetActive(true);
+                _timerCheckpointDiff.text = (diff > 0 ? "+" : "") + diff.ToString("0.00");
+                _timerCheckpointDiff.color = diff > 0 ? Color.red : Color.green;
+                StartCoroutine(WaitAndDisappear());
+            }
+            _nextCheckpointId++;
+        }
+
+        private IEnumerator WaitAndDisappear()
+        {
+            yield return new WaitForSeconds(1f);
+            _timerCheckpointDiff.gameObject.SetActive(false);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
