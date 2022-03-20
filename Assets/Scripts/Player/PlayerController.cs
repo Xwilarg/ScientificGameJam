@@ -88,6 +88,7 @@ namespace ScientificGameJam.Player
 
         public void StopRace()
         {
+            _powerupContainer.SetActive(false);
             _zoneModifier = 1f;
             _speedBoost = 1f;
             _remainingLaps = _remainingLapsRef;
