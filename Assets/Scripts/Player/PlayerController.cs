@@ -183,8 +183,8 @@ namespace ScientificGameJam.Player
                 else
                 {
                     _canMove = false; // Not using setter so we don't touch the rb
-                    RaceManager.Instance.EndRace();
                     SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, new List<PlayerCoordinate>(_currentCoordinates));
+                    RaceManager.Instance.EndRace();
                 }
             }
             else if (collision.CompareTag("Checkpoint") && _nextId == collision.gameObject.GetComponent<Checkpoint>().Id)

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Medals:
   - Name: Gold
-    Time: 8
+    Time: 40
   - Name: Silver
-    Time: 10
+    Time: 45
   - Name: Copper
-    Time: 15
+    Time: 55
