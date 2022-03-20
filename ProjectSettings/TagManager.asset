@@ -6,7 +6,7 @@ TagManager:
   tags:
   - FinishLine
   - Checkpoint
-  - BoostZone
+  - ZoneBoost
   layers:
   - Default
   - TransparentFX

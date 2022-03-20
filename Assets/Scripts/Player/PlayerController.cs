@@ -38,6 +38,9 @@ namespace ScientificGameJam.Player
 
         private float _speedBoost;
 
+        private float _zoneModifier;
+        public List<string> PassiveBoosts { private set; get; } = new List<string>();
+
         public void GainSpeedBoost(float percentage)
         {
             _speedBoost = percentage;
@@ -79,6 +82,7 @@ namespace ScientificGameJam.Player
 
         public void StopRace()
         {
+            _zoneModifier = 1f;
             _speedBoost = 1f;
             _remainingLaps = _remainingLapsRef;
             _nextId = 0;
@@ -158,7 +162,7 @@ namespace ScientificGameJam.Player
                     {
                         speed = _rb.velocity.magnitude * Vector2.Dot(_rb.velocity, transform.up) / Mathf.Abs(Vector2.Dot(_rb.velocity, transform.up));
                     }
-                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost;
+                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost * _zoneModifier;
                 }
 
                 transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
@@ -203,7 +207,28 @@ namespace ScientificGameJam.Player
                 DisplayDelay();
                 _nextId++;
             }
+            else if (collision.CompareTag("ZoneBoost"))
+            {
+                var modifier = collision.gameObject.GetComponent<Modifier>();
+                if (PassiveBoosts.Contains(modifier.TargetTag))
+                {
+                    _zoneModifier = modifier.SpeedModifierEnabled;
+                }
+                else
+                {
+                    _zoneModifier = modifier.SpeedModifierBase;
+                }
+            }
         }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.CompareTag("ZoneBoost"))
+            {
+                _zoneModifier = 1f;
+            }
+        }
+
         private int _nextCheckpointId = 0;
 
         public void DisplayDelay()

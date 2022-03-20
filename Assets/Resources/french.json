@@ -9,5 +9,8 @@
     "gotAllMedals": "Vous avez eut toutes les médailles !",
     "nextMedal": "Faîtes moins que {0}s pour la prochaine médaille !",
 
+    "chimiotaxieScience": "Les cellules vivent dans un environnement chimique complexe. Certaines cellules sont capables de sentir et suivre des gradients chimiques. C’est-à-dire qu’elles se dirigeront vers la source diffusant ces molécules en se déplaçant vers les zones les plus concentrées. C’est un phénomène majeur pour guider le déplacement des cellules qui a lieu de nombreuses fois au cours du développement embryonnaire. Ce mécanisme s'appelle la chimiotaxie.",
+    "chimiotaxieGame": "Les passages possédant un gradient chimique pourront être parcourus plus rapidement.",
+
     "colon": " :"
 }

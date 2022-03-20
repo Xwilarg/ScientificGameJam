@@ -151,7 +151,16 @@ namespace ScientificGameJam.Race
             yield return new WaitForSeconds(1f);
             _raceCountdown.gameObject.SetActive(false);
 
+            RefreshPowerups();
+
+            _player.StartRace();
+            _didRaceStart = true;
+        }
+
+        private void RefreshPowerups()
+        {
             _player.ActivePowerups.Clear();
+            _player.PassiveBoosts.Clear();
             foreach (var power in PowerUpManager.Instance.EquippedPowerUps)
             {
                 if (power == null)
@@ -160,16 +169,17 @@ namespace ScientificGameJam.Race
                 }
                 if (power.IsPassive)
                 {
-                    PowerUpManager.Instance.TriggerPowerup(power, _player);
+                    // PowerUpManager.Instance.TriggerPowerup(power, _player);
+                    if (power.Effect == PowerupEffect.ZoneBoost)
+                    {
+                        _player.PassiveBoosts.Add(power.Argument);
+                    }
                 }
                 else
                 {
                     _player.ActivePowerups.Add(power);
                 }
             }
-
-            _player.StartRace();
-            _didRaceStart = true;
         }
 
         public void OnRestart(InputAction.CallbackContext input)
@@ -177,6 +187,7 @@ namespace ScientificGameJam.Race
             if (input.performed)
             {
                 _player.StopRace();
+                RefreshPowerups();
                 StartRace();
             }
         }
