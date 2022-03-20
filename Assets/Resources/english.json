@@ -3,9 +3,17 @@
     "options": "Settings",
     "credits": "Credits",
     "menu": "Menu",
+
     "language": "Language",
-    "music": "Musics",
+    "music": "Music",
     "sfx": "Audio effects",
+
+    "howToPlay": "How to play",
+    "forward": "Move forwards",
+    "backward": "Move backwards",
+    "turn": "Turn",
+    "usePower": "Use power up",
+
     "creditsScience": "Scientist",
     "creditsGD": "Game Design",
     "creditsProg": "Programming",
