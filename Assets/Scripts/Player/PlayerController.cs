@@ -65,6 +65,10 @@ namespace ScientificGameJam.Player
                 if (!value)
                 {
                     _rb.velocity = Vector3.zero;
+                    foreach (var e in _follows)
+                    {
+                        e.Move(Vector3.zero);
+                    }
                 }
                 _canMove = value;
             }
@@ -94,6 +98,10 @@ namespace ScientificGameJam.Player
 
         public void StopRace()
         {
+            foreach (var e in _follows)
+            {
+                e.ResetAll();
+            }
             _powerupContainer.SetActive(false);
             _zoneModifier = 1f;
             _footprintModifier = 1f;
@@ -185,10 +193,19 @@ namespace ScientificGameJam.Player
                     {
                         speed = _rb.velocity.magnitude * Vector2.Dot(_rb.velocity, transform.up) / Mathf.Abs(Vector2.Dot(_rb.velocity, transform.up));
                     }
-                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost * _zoneModifier * _zoneModifier;
+                    var targetVel = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost * _zoneModifier * _zoneModifier;
+                    foreach (var e in _follows)
+                    {
+                        e.Move(targetVel);
+                    }
+                    _rb.velocity = targetVel;
                 }
 
                 transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
+                foreach (var e in _follows)
+                {
+                    e.Rot(transform.rotation.eulerAngles.z);
+                }
 
                 _currentCoordinates.Add(new PlayerCoordinate
                 {

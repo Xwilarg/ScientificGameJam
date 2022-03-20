@@ -7,6 +7,7 @@ TagManager:
   - FinishLine
   - Checkpoint
   - ZoneBoost
+  - Empreintes
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Child
   - 
   - 
   - 

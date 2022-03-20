@@ -19,6 +19,17 @@ namespace ScientificGameJam.Player
         {
             transform.position = _orPos;
             transform.rotation = Quaternion.Euler(0f, 0f, _orRot);
+            _rb.velocity = Vector2.zero;
+        }
+
+        public void Move(Vector2 vel)
+        {
+            _rb.velocity = vel;
+        }
+
+        public void Rot(float rot)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, rot);
         }
     }
 }
