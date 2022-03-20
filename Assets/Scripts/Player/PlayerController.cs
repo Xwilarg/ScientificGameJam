@@ -148,6 +148,14 @@ namespace ScientificGameJam.Player
                     _speedBoost = 1f;
                 }
             }
+            else if (_speedBoost < 1f)
+            {
+                _speedBoost += Time.deltaTime * _info.BoostReduce;
+                if (_speedBoost > 1f)
+                {
+                    _speedBoost = 1f;
+                }
+            }
         }
 
         private void FixedUpdate()
