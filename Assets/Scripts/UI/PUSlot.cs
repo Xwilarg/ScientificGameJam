@@ -35,7 +35,11 @@ namespace ScientificGameJam.UI
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (powerUp != null) Destroy(powerUp);
+            if (powerUp != null)
+            {
+                powerUp.GetComponent<PUDragHandler>().DestroyMessage();
+                Destroy(powerUp);
+            }
             puManager.RemovePowerup(slotNumber);
         }
     }

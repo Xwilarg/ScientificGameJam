@@ -87,14 +87,6 @@ namespace ScientificGameJam.PowerUp
         public void AddPowerup(int index, string name)
         {
             EquippedPowerUps[index] = AvailablePowerUps.FirstOrDefault(x => x.Title == name);
-
-            foreach(var power in AvailablePowerUps)
-            {
-                UnityEngine.Debug.Log(power.Title);
-                UnityEngine.Debug.Log(name);
-                UnityEngine.Debug.Log(power.Title == name);
-            }
-            
         }
 
         public void RemovePowerup(int index)

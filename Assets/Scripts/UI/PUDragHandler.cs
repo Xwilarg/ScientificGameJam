@@ -59,7 +59,13 @@ namespace ScientificGameJam.UI
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            DestroyMessage();
+        }
+
+        public void DestroyMessage()
+        {
             Destroy(messageInstance);
+            messageInstance = null;
         }
     }
 }
