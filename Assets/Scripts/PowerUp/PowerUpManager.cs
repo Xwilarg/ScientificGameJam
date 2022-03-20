@@ -120,7 +120,7 @@ namespace ScientificGameJam.PowerUp
 
         public void ClearPowerups()
         {
-            for (int i = 0; i < _powers.Length; i++)
+            for (int i = 0; i < EquippedPowerUps.Length; i++)
             {
                 EquippedPowerUps[i] = null;
             }
