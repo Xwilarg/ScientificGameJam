@@ -26,6 +26,8 @@ namespace ScientificGameJam.Player
         [SerializeField]
         private TMP_Text _timerCheckpointDiff;
 
+        public GameObject Footprints;
+
         private AudioSource _source;
 
         // Base controls
@@ -42,6 +44,7 @@ namespace ScientificGameJam.Player
         private float _speedBoost;
 
         private float _zoneModifier;
+        private float _footprintModifier;
         public List<string> PassiveBoosts { private set; get; } = new List<string>();
 
         public void GainSpeedBoost(float percentage)
@@ -90,6 +93,7 @@ namespace ScientificGameJam.Player
         {
             _powerupContainer.SetActive(false);
             _zoneModifier = 1f;
+            _footprintModifier = 1f;
             _speedBoost = 1f;
             _remainingLaps = _remainingLapsRef;
             _nextId = 0;
@@ -178,7 +182,7 @@ namespace ScientificGameJam.Player
                     {
                         speed = _rb.velocity.magnitude * Vector2.Dot(_rb.velocity, transform.up) / Mathf.Abs(Vector2.Dot(_rb.velocity, transform.up));
                     }
-                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost * _zoneModifier;
+                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost * _zoneModifier * _zoneModifier;
                 }
 
                 transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
@@ -261,6 +265,16 @@ namespace ScientificGameJam.Player
                     }
                 }
             }
+        }
+
+        public void EnablePrintBonus()
+        {
+            _footprintModifier = 1.25f;
+        }
+
+        public void ResetPrintBonus()
+        {
+            _footprintModifier = 1f;
         }
 
         private void OnTriggerExit2D(Collider2D collision)

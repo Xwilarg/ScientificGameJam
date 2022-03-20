@@ -183,13 +183,18 @@ namespace ScientificGameJam.Race
         {
             _player.ActivePowerups.Clear();
             _player.PassiveBoosts.Clear();
+            _player.Footprints.SetActive(false);
             foreach (var power in PowerUpManager.Instance.EquippedPowerUps)
             {
                 if (power == null)
                 {
                     continue;
                 }
-                if (power.IsPassive)
+                if (power.Effect == PowerupEffect.Empreinte)
+                {
+                    _player.Footprints.SetActive(true);
+                }
+                else if (power.IsPassive)
                 {
                     // PowerUpManager.Instance.TriggerPowerup(power, _player);
                     if (power.Effect == PowerupEffect.ZoneBoost)

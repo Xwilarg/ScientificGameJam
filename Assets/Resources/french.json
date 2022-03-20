@@ -37,5 +37,9 @@
     "durotaxieScience": "Les cellules possèdent le sens du toucher. Elles sont mécano-sensitives, c'est-à-dire qu'elles sont capables de sentir la rigidité du substrat sur lequel elles adhèrent. Il existe une rigidité optimale pour laquelle les cellules vont le plus vite. Si le substrat est trop rigide, elles seront trop adhérentes et deviendront immobiles, si le substrat est trop mou, elles utiliseront la majorité de leur énergie à déformer le substrat et non à se propulser. Pour cette course vous êtes au départ sur un substrat plus mou que votre rigidité optimale, les zones plus rigides vous accélèreront mais attention les zones plus molles vous ralentiront. Ce phénomène s'appelle la durotaxie.",
     "durotaxieGame": "Révèle si les zones de rigidité différentes sont des booster ou des ralentisseurs.",
 
+    "stigmergieName" : "Stigmergie",
+    "stigmergieScience": "Les cellules adhèrent à un substrat composé d'un réseau de macromolécules formant la matrice extracellulaire. Au cours de leur déplacement les cellules sont capables de réorganiser la matrice extracellulaire environnante pour optimiser leurs futurs déplacements. Elles laissent donc derrière elles une « empreinte » permettant de revenir plus efficacement là où elles sont déjà passées mais aussi de guider les cellules qui les suivent. Ce mécanisme de coordination indirect est appelé stigmergie.",
+    "stigmergieGame": "Repasser sur votre empreinte au second tour pour améliorer votre temps.",
+
     "colon": " :"
 }
