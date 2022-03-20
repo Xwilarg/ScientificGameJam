@@ -67,6 +67,13 @@ namespace ScientificGameJam.Race
             }
         }
 
+        public void HideView()
+        {
+            _courseEndGo.SetActive(false);
+            _playerCamera.gameObject.SetActive(false);
+            _overviewCamera.gameObject.SetActive(true);
+        }
+
         public void StartRace()
         {
             _courseEndGo.SetActive(false);
@@ -148,7 +155,7 @@ namespace ScientificGameJam.Race
                 }
                 if (power.IsPassive)
                 {
-                    //PowerUpManager.Instance.TriggerPowerup(power, _player);
+                    PowerUpManager.Instance.TriggerPowerup(power, _player);
                 }
                 else
                 {
