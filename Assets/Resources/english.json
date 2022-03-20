@@ -5,7 +5,7 @@
     "retry": "Retry",
     "next": "Next",
 
-    "currentMedal": "Your time",
+    "yourTime": "Your time",
     "gotAllMedals": "You got all medals!",
     "nextMedal": "Do less than {0}s for the next medal!",
 
