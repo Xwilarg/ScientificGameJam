@@ -301,13 +301,11 @@ namespace ScientificGameJam.Player
         public void EnablePrintBonus()
         {
             _footprintModifier = 1.25f;
-            UnityEngine.Debug.Log("I'm feeling it ! Current speed = "+_rb.velocity.magnitude);
         }
 
         public void ResetPrintBonus()
         {
             _footprintModifier = 1f;
-            UnityEngine.Debug.Log("I'm not feeling it ! Current speed = "+_rb.velocity.magnitude);
         }
 
         private void OnTriggerExit2D(Collider2D collision)
