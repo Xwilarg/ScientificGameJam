@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: chimiotaxieName
   DescriptionScience: chimiotaxieScience
   DescriptionGame: chimiotaxieGame
-  Image: {fileID: 21300000, guid: 6918304190491824b84317f2ff8c3c2d, type: 3}
+  Image: {fileID: 21300000, guid: 999a2dbb1c026b24395b034b49975b32, type: 3}
   ExplEn: {fileID: 21300000, guid: 4516401215dbff04398007142f9c5f93, type: 3}
   ExplFr: {fileID: 21300000, guid: b288fab7864c9aa49a662a1214ec9346, type: 3}
   IsPassive: 1
