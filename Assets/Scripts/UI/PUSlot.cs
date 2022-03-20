@@ -20,6 +20,7 @@ namespace ScientificGameJam.UI
                 if (!puManager.ContainsPowerup(pu.powerUpName))
                 {
                     if (powerUp != null) Destroy(powerUp);
+                    
                     puManager.AddPowerup(slotNumber, pu.powerUpName);
 
                     powerUp = Instantiate(eventData.pointerDrag, transform);
@@ -34,7 +35,11 @@ namespace ScientificGameJam.UI
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (powerUp != null) Destroy(powerUp);
+            if (powerUp != null)
+            {
+                powerUp.GetComponent<PUDragHandler>().DestroyMessage();
+                Destroy(powerUp);
+            }
             puManager.RemovePowerup(slotNumber);
         }
     }

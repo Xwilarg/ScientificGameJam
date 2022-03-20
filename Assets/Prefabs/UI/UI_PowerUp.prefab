@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f54c74709003844abdb8500f32dced8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  messagePrefab: {fileID: 3469282304047975636, guid: e5e44fe5bd4bc39458d6a04c76ffb84c, type: 3}
+  powerUpName: 
 --- !u!225 &5231460251840977637
 CanvasGroup:
   m_ObjectHideFlags: 0
