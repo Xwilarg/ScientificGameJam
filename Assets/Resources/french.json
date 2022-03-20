@@ -9,8 +9,8 @@
     "sfx": "Effets sonores",
 
     "howToPlay": "Comment jouer",
-    "forward": "Avancer",
-    "backward": "Reculer",
+    "forward": "Avancer/Reculer",
+    "restart": "Recommencer",
     "turn": "Tourner",
     "usePower": "Action",
 
