@@ -67,7 +67,7 @@ namespace ScientificGameJam.Player
                     _rb.velocity = Vector3.zero;
                     foreach (var e in _follows)
                     {
-                        e.Move(Vector3.zero);
+                        e.Move(Vector3.zero, transform.position);
                     }
                 }
                 _canMove = value;
@@ -159,6 +159,10 @@ namespace ScientificGameJam.Player
         private void Start()
         {
             StopRace();
+            foreach (var a in _follows)
+            {
+                a.Offset = transform.position - a.transform.position;
+            }
         }
 
         private void Update()
@@ -196,7 +200,7 @@ namespace ScientificGameJam.Player
                     var targetVel = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost * _zoneModifier * _zoneModifier;
                     foreach (var e in _follows)
                     {
-                        e.Move(targetVel);
+                        e.Move(targetVel, transform.position);
                     }
                     _rb.velocity = targetVel;
                 }

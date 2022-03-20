@@ -8,6 +8,8 @@ namespace ScientificGameJam.Player
         private Vector2 _orPos;
         private float _orRot;
 
+        public Vector2 Offset;
+
         private void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -22,9 +24,13 @@ namespace ScientificGameJam.Player
             _rb.velocity = Vector2.zero;
         }
 
-        public void Move(Vector2 vel)
+        public void Move(Vector2 vel, Vector2 pPos)
         {
             _rb.velocity = vel;
+            if (Vector2.Distance(pPos, transform.position) > 4f)
+            {
+                transform.position = pPos - Offset;
+            }
         }
 
         public void Rot(float rot)
