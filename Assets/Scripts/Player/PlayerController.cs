@@ -26,6 +26,9 @@ namespace ScientificGameJam.Player
         [SerializeField]
         private TMP_Text _timerCheckpointDiff;
 
+        [SerializeField]
+        private ChildFollow[] _follows;
+
         public GameObject Footprints;
 
         private AudioSource _source;
