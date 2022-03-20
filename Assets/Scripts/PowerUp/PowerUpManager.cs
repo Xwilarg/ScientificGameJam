@@ -109,7 +109,7 @@ namespace ScientificGameJam.PowerUp
 
         public String GetPowerupDescription(string name)
         {
-            return EquippedPowerUps.First(x => x?.Title == name).Description;
+            return _powers.First(x => x?.Title == name).Description;
         }
 
         public void ClearPowerups()
