@@ -6,6 +6,7 @@ using ScientificGameJam.Player;
 using System.Linq;
 using ScientificGameJam.UI;
 using UnityEngine.UI;
+using ScientificGameJam.Translation;
 
 namespace ScientificGameJam.PowerUp
 {
@@ -109,9 +110,10 @@ namespace ScientificGameJam.PowerUp
             return EquippedPowerUps.Any(x => x != null && x.Title == name);
         }
 
-        public String GetPowerupDescription(string name)
+        public string GetPowerupDescription(string name)
         {
-            return _powers.First(x => x?.Title == name).Description;
+            var elem = _powers.First(x => x != null && x.Title == name);
+            return $"{Translate.Instance.Tr(elem.DescriptionGame)}\n\n{Translate.Instance.Tr(elem.DescriptionScience)}";
         }
 
         public void ClearPowerups()
