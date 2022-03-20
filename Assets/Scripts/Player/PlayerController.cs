@@ -266,6 +266,13 @@ namespace ScientificGameJam.Player
             else if (collision.CompareTag("ZoneBoost"))
             {
                 var modifier = collision.gameObject.GetComponent<Modifier>();
+                if (modifier.TargetTag == "Migration")
+                {
+                    foreach (var t in _follows)
+                    {
+                        t.IsInZone = true;
+                    }
+                }
                 if (modifier.GiveBoost)
                 {
                     if (PassiveBoosts.Contains(modifier.TargetTag))
@@ -308,6 +315,13 @@ namespace ScientificGameJam.Player
             if (collision.CompareTag("ZoneBoost"))
             {
                 var modifier = collision.gameObject.GetComponent<Modifier>();
+                if (modifier.TargetTag == "Migration")
+                {
+                    foreach (var t in _follows)
+                    {
+                        t.IsInZone = false;
+                    }
+                }
                 if (!modifier.GiveBoost)
                 {
                     _zoneModifier = 1f;

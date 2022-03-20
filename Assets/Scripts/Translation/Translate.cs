@@ -69,6 +69,7 @@ namespace ScientificGameJam.Translation
                     tt.UpdateText();
                 }
             }
+            get => _currentLanguage;
         }
 
         private readonly Dictionary<string, Dictionary<string, string>> _translationData = new Dictionary<string, Dictionary<string, string>>();

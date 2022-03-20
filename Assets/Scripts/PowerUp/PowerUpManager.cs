@@ -118,6 +118,16 @@ namespace ScientificGameJam.PowerUp
             return $"{descGa}\n\n{descSc}";
         }
 
+        public Sprite GetPowerupExpl(string name)
+        {
+            var elem = _powers.First(x => x != null && x.Id == name);
+            if (Translate.Instance.CurrentLanguage == "french")
+            {
+                return elem.ExplFr;
+            }
+            return elem.ExplEn;
+        }
+
         public void ClearPowerups()
         {
             for (int i = 0; i < EquippedPowerUps.Length; i++)
