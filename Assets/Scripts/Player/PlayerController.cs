@@ -28,6 +28,7 @@ namespace ScientificGameJam.Player
         // Saves and ghosts
         private readonly List<Ghost> _ghosts = new List<Ghost>();
         private readonly List<PlayerCoordinate> _currentCoordinates = new List<PlayerCoordinate>();
+        private readonly List<float> _checkpointTimes = new List<float>();
         private float _timerRef;
 
         private float _speedBoost;
@@ -103,6 +104,7 @@ namespace ScientificGameJam.Player
             UpdatePowerupList();
 
             _currentCoordinates.Clear();
+            _checkpointTimes.Clear();
             _timerRef = Time.unscaledTime;
             CanMove = true;
             if (SaveLoad.Instance.HaveBestTime)
@@ -183,7 +185,9 @@ namespace ScientificGameJam.Player
                 else
                 {
                     _canMove = false; // Not using setter so we don't touch the rb
-                    SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, new List<PlayerCoordinate>(_currentCoordinates));
+                    SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer,
+                        new List<PlayerCoordinate>(_currentCoordinates),
+                        new List<float>(_checkpointTimes));
                     RaceManager.Instance.EndRace();
                 }
             }
@@ -191,6 +195,12 @@ namespace ScientificGameJam.Player
             {
                 _nextId++;
             }
+        }
+
+        public void DisplayDelay()
+        {
+            var timer = Time.unscaledTime - _timerRef;
+            _checkpointTimes.Add(Time.unscaledTime - _timerRef);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
