@@ -67,6 +67,11 @@ namespace ScientificGameJam.Race
             }
         }
 
+        public void Stop()
+        {
+            _player.StopRace();
+        }
+
         public void HideView()
         {
             _courseEndGo.SetActive(false);
