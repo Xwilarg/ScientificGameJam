@@ -6,6 +6,7 @@ using ScientificGameJam.Player;
 using System.Linq;
 using ScientificGameJam.UI;
 using UnityEngine.UI;
+using ScientificGameJam.Translation;
 
 namespace ScientificGameJam.PowerUp
 {
@@ -20,6 +21,8 @@ namespace ScientificGameJam.PowerUp
         [Tooltip("Prefab of the UI_PowerUp")]
         public GameObject puPrefab;
         private float puPrefabHeight;
+        [SerializeField]
+        private GameObject _baseContainer;
 
         [Header("Parameters")]
         public int containerPadding;
@@ -34,37 +37,67 @@ namespace ScientificGameJam.PowerUp
         {
             Instance = this;
 
-            // Debug
-            foreach (var power in _powers)
+            // DEBUG
+            /*foreach (var p in _powers)
             {
-                AvailablePowerUps.Add(power);
-            }
+                AvailablePowerUps.Add(p);
+            }*/
         }
 
         public void Start()
         {
-            float yPos = -containerPadding;
             puPrefabHeight = puPrefab.GetComponent<RectTransform>().sizeDelta.y;
 
-            foreach (var power in AvailablePowerUps)
+            ToggleDisplay(true);
+        }
+
+        public void GainPowerup()
+        {
+            var remainings = _powers.Where(x => !ContainsPowerup(x.Id)).ToArray();
+            if (remainings.Any())
             {
-                GameObject pu = Instantiate(puPrefab, puContainer.transform);
-                pu.transform.localPosition = new Vector2(0, yPos);
-
-                pu.GetComponent<Image>().sprite = power.Image;
-                pu.GetComponent<PUDragHandler>().powerUpName = power.name;
-
-                RectTransform rect = pu.GetComponent<RectTransform>();
-                rect.anchorMin = new Vector2(0.5f, 1f);
-                rect.anchorMax = new Vector2(0.5f, 1f);
-                rect.pivot = new Vector2(0.5f, 1f);
-
-                yPos -= containerPadding + puPrefabHeight;
+                var random = remainings[UnityEngine.Random.Range(0, remainings.Length)];
+                AvailablePowerUps.Add(random);
             }
         }
+
+        private List<GameObject> _instanciated = new List<GameObject>();
+        public void ToggleDisplay(bool status)
+        {
+            _baseContainer.SetActive(status);
+
+            if (status)
+            {
+                foreach (var go in _instanciated)
+                {
+                    Destroy(go);
+                }
+                _instanciated.Clear();
+
+                float yPos = -containerPadding;
+                foreach (var power in AvailablePowerUps)
+                {
+                    GameObject pu = Instantiate(puPrefab, puContainer.transform);
+                    ((RectTransform)pu.transform).anchoredPosition = new Vector2(0, yPos);
+
+                    pu.GetComponent<Image>().sprite = power.Image;
+                    pu.GetComponent<PUDragHandler>().powerUpName = power.Id;
+
+                    _instanciated.Add(pu);
+
+                    RectTransform rect = pu.GetComponent<RectTransform>();
+                    rect.anchorMin = new Vector2(0.5f, 1f);
+                    rect.anchorMax = new Vector2(0.5f, 1f);
+                    rect.pivot = new Vector2(0.5f, 1f);
+
+                    yPos -= containerPadding + puPrefabHeight;
+                }
+            }
+        }
+
         public void AddPowerup(int index, string name)
         {
-            EquippedPowerUps[index] = AvailablePowerUps.FirstOrDefault(x => x.Title == name);
+            EquippedPowerUps[index] = AvailablePowerUps.FirstOrDefault(x => x.Id == name);
         }
 
         public void RemovePowerup(int index)
@@ -74,12 +107,30 @@ namespace ScientificGameJam.PowerUp
 
         public bool ContainsPowerup(string name)
         {
-            return EquippedPowerUps.Any(x => x?.Title == name);
+            return EquippedPowerUps.Any(x => x != null && x.Id == name);
+        }
+
+        public string GetPowerupDescription(string name)
+        {
+            var elem = _powers.First(x => x != null && x.Id == name);
+            var descGa = string.IsNullOrEmpty(elem.DescriptionGame) ? elem.DescriptionGame : Translate.Instance.Tr(elem.DescriptionGame);
+            var descSc = string.IsNullOrEmpty(elem.DescriptionScience) ? elem.DescriptionScience : Translate.Instance.Tr(elem.DescriptionScience);
+            return $"{descGa}\n\n{descSc}";
+        }
+
+        public Sprite GetPowerupExpl(string name)
+        {
+            var elem = _powers.First(x => x != null && x.Id == name);
+            if (Translate.Instance.CurrentLanguage == "french")
+            {
+                return elem.ExplFr;
+            }
+            return elem.ExplEn;
         }
 
         public void ClearPowerups()
         {
-            for (int i = 0; i < _powers.Length; i++)
+            for (int i = 0; i < EquippedPowerUps.Length; i++)
             {
                 EquippedPowerUps[i] = null;
             }

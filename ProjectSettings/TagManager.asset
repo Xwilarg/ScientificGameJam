@@ -6,6 +6,9 @@ TagManager:
   tags:
   - FinishLine
   - Checkpoint
+  - ZoneBoost
+  - Empreintes
+  - Description
   layers:
   - Default
   - TransparentFX
@@ -13,8 +16,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Child
   - 
   - 
   - 
@@ -40,6 +43,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1425303103
+    locked: 0
+  - name: Particles
+    uniqueID: 1983616753
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

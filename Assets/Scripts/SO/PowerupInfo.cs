@@ -6,10 +6,12 @@ namespace ScientificGameJam.SO
     [CreateAssetMenu(menuName = "ScriptableObject/PowerupInfo", fileName = "PowerupInfo")]
     public class PowerupInfo : ScriptableObject
     {
-        public string Title;
-        public string Description;
+        public string Id;
+        public string DescriptionScience;
+        public string DescriptionGame;
 
         public Sprite Image;
+        public Sprite ExplEn, ExplFr;
 
         //Wether the power-up is passive or activates with a button
         public bool IsPassive;
