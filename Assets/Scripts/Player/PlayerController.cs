@@ -196,7 +196,7 @@ namespace ScientificGameJam.Player
         private void OnCollisionEnter2D(Collision2D collision)
         {
             // Slow down player if he touch a wall
-            _rb.velocity /= 2f;
+            _rb.velocity /= 1f;
         }
 
         public void OnMovement(InputAction.CallbackContext value)
