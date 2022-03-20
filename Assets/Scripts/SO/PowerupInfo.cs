@@ -6,7 +6,7 @@ namespace ScientificGameJam.SO
     [CreateAssetMenu(menuName = "ScriptableObject/PowerupInfo", fileName = "PowerupInfo")]
     public class PowerupInfo : ScriptableObject
     {
-        public string Title;
+        public string Id;
         public string DescriptionScience;
         public string DescriptionGame;
 

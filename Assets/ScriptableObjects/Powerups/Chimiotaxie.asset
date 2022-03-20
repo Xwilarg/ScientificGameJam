@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cff10df4a87f5244a3fa28f4172622f, type: 3}
   m_Name: Chimiotaxie
   m_EditorClassIdentifier: 
-  Title: Chimiotaxie
+  Title: chimiotaxieName
   DescriptionScience: chimiotaxieScience
   DescriptionGame: chimiotaxieGame
   Image: {fileID: 21300000, guid: 6918304190491824b84317f2ff8c3c2d, type: 3}

@@ -9,8 +9,17 @@
     "gotAllMedals": "Vous avez eut toutes les médailles !",
     "nextMedal": "Faîtes moins que {0}s pour la prochaine médaille !",
 
-    "chimiotaxieScience": "Les cellules vivent dans un environnement chimique complexe. Certaines cellules sont capables de sentir et suivre des gradients chimiques. C’est-à-dire qu’elles se dirigeront vers la source diffusant ces molécules en se déplaçant vers les zones les plus concentrées. C’est un phénomène majeur pour guider le déplacement des cellules qui a lieu de nombreuses fois au cours du développement embryonnaire. Ce mécanisme s'appelle la chimiotaxie.",
+    "chimiotaxieName": "Chimiotaxie",
+    "chimiotaxieScience": "Les cellules vivent dans un environnement chimique complexe. Certaines cellules sont capables de sentir et suivre des gradients chimiques. C'est-à-dire qu'elles se dirigeront vers la source diffusant ces molécules en se déplaçant vers les zones les plus concentrées. C'est un phénomène majeur pour guider le déplacement des cellules qui a lieu de nombreuses fois au cours du développement embryonnaire. Ce mécanisme s'appelle la chimiotaxie.",
     "chimiotaxieGame": "Les passages possédant un gradient chimique pourront être parcourus plus rapidement.",
+    
+    "lamellipodeName": "Lamellipode amélioré",
+    "lamellipodeScience": "Avoir un lamellipode augmenté vous fait aller plus vite.",
+    "lamellipodeGame": "Le lamellipode est la partie de la cellule à l'origine du mouvement pour les cellules adhérentes. Dans cette zone très dynamique à l'avant de la cellule se forme de nombreuses adhésions avec le substrat par l'intermédiaire de complexe de protéines appelés adhésions focales. Les adhésions focales servent de point d'ancrage à la cellule pour se propulser.",
+    
+    "migrationName": "Migration mésenchymateuse",
+    "migrationScience": "Certaines mutations, notamment celles affectant les jonctions entre cellules, peuvent donner lieu à une migration collective mésenchymateuse. La modification des jonctions intercellulaires va déstabiliser le collectif de cellule et favoriser la propulsion individuelle celles-ci. Cette nouvelle propulsion rend les cellules beaucoup plus invasives. Ce phénomène est en jeu dans de nombreux cancer. Des cellules mutantes risque de s'échapper de la tumeur principale pour aller former des tumeurs secondaires appelés métastases. Cette migration invasive s'appelle la migration mésenchymateuse.",
+    "migrationGame": "La capacité invasive de la migration mésenchymateuse permet de prendre les passages bloqués par d'autres cellules.",
 
     "colon": " :"
 }
