@@ -88,7 +88,7 @@ namespace ScientificGameJam.SaveData
         public float BestTime { private set; get; } = -1f;
         public IReadOnlyList<PlayerCoordinate> Coordinates { private set; get; } = new List<PlayerCoordinate>();
         public IReadOnlyList<float> Checkpoints { private set; get; } = new List<float>();
-        public void UpdateBestTime(float timer, List<PlayerCoordinate> coordinates, List<float> checkpoints)
+        public bool UpdateBestTime(float timer, List<PlayerCoordinate> coordinates, List<float> checkpoints)
         {
             if (!HaveBestTime || timer < BestTime)
             {
@@ -96,7 +96,9 @@ namespace ScientificGameJam.SaveData
                 Coordinates = coordinates;
                 Checkpoints = checkpoints;
                 UpdateSavesTime();
+                return true;
             }
+            return false;
         }
 
         private readonly string _pathTime = $"{Application.persistentDataPath}/time.bin";

@@ -1,3 +1,4 @@
+using ScientificGameJam.Audio;
 using ScientificGameJam.Player;
 using ScientificGameJam.PowerUp;
 using ScientificGameJam.SaveData;
@@ -19,6 +20,7 @@ namespace ScientificGameJam.Race
         private void Awake()
         {
             Instance = this;
+            _source = GetComponent<AudioSource>();
         }
 
         [SerializeField]
@@ -55,6 +57,11 @@ namespace ScientificGameJam.Race
         [SerializeField]
         private Image[] _medals;
 
+        private AudioSource _source;
+
+        [SerializeField]
+        private AudioClip _bipLow, _bipHigh;
+
         public float RaceTimer { private set; get; }
         private bool _didRaceStart;
 
@@ -77,10 +84,14 @@ namespace ScientificGameJam.Race
             _courseEndGo.SetActive(false);
             _playerCamera.gameObject.SetActive(false);
             _overviewCamera.gameObject.SetActive(true);
+
+            BGMManager.Instance.PlayPowerupSelect();
         }
 
         public void StartRace()
         {
+            BGMManager.Instance.PlayDuringRace();
+
             _courseEndGo.SetActive(false);
 
             // Set camera on player
@@ -144,11 +155,15 @@ namespace ScientificGameJam.Race
         {
             _didRaceStart = false;
             _raceCountdown.text = "3";
+            _source.PlayOneShot(_bipLow);
             yield return new WaitForSeconds(1f);
             _raceCountdown.text = "2";
+            _source.PlayOneShot(_bipLow);
             yield return new WaitForSeconds(1f);
             _raceCountdown.text = "1";
+            _source.PlayOneShot(_bipLow);
             yield return new WaitForSeconds(1f);
+            _source.PlayOneShot(_bipHigh);
             _raceCountdown.gameObject.SetActive(false);
 
             RefreshPowerups();
