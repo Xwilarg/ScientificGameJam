@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6296038186561364312}
   - component: {fileID: 6296038186561364315}
   - component: {fileID: 6296038186561364314}
+  - component: {fileID: 1475040054267117026}
   m_Layer: 0
   m_Name: Boost
   m_TagString: Untagged
@@ -109,3 +110,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7036114, y: 3.3110833}
   m_EdgeRadius: 0
+--- !u!114 &1475040054267117026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6296038186561364309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95c459470255e641bfc9dd81fd54e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedModifierBase: 1.5
+  SpeedModifierEnabled: 0.5
+  TargetTag: Durotaxie
+  GiveBoost: 1
