@@ -2,6 +2,8 @@
     "play": "Jouer",
     "best": "Best",
     "none": "None",
+    "retry": "Retry",
+    "next": "Next",
 
     "currentMedal": "Your time",
     "gotAllMedals": "You got all medals!",

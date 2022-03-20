@@ -3,8 +3,10 @@ using ScientificGameJam.PowerUp;
 using ScientificGameJam.Race;
 using ScientificGameJam.SaveData;
 using ScientificGameJam.SO;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -20,6 +22,9 @@ namespace ScientificGameJam.Player
         [SerializeField]
         private GameObject _ghost;
 
+        [SerializeField]
+        private TMP_Text _timerCheckpointDiff;
+
         // Base controls
         private Rigidbody2D _rb;
         private float _verSpeed;
@@ -28,9 +33,13 @@ namespace ScientificGameJam.Player
         // Saves and ghosts
         private readonly List<Ghost> _ghosts = new List<Ghost>();
         private readonly List<PlayerCoordinate> _currentCoordinates = new List<PlayerCoordinate>();
+        private readonly List<float> _checkpointTimes = new List<float>();
         private float _timerRef;
 
         private float _speedBoost;
+
+        private float _zoneModifier;
+        public List<string> PassiveBoosts { private set; get; } = new List<string>();
 
         public void GainSpeedBoost(float percentage)
         {
@@ -68,10 +77,15 @@ namespace ScientificGameJam.Player
         private int _checkpointCount;
 
         [SerializeField]
+        private int _remainingLapsRef;
         private int _remainingLaps;
 
         public void StopRace()
         {
+            _zoneModifier = 1f;
+            _speedBoost = 1f;
+            _remainingLaps = _remainingLapsRef;
+            _nextId = 0;
             transform.position = _orPos;
             transform.rotation = Quaternion.Euler(0f, 0f, _orRot);
             foreach (var ghost in _ghosts)
@@ -96,11 +110,11 @@ namespace ScientificGameJam.Player
 
         public void StartRace()
         {
-            _speedBoost = 1f;
-
             UpdatePowerupList();
 
             _currentCoordinates.Clear();
+            _checkpointTimes.Clear();
+            _nextCheckpointId = 0;
             _timerRef = Time.unscaledTime;
             CanMove = true;
             if (SaveLoad.Instance.HaveBestTime)
@@ -117,6 +131,11 @@ namespace ScientificGameJam.Player
             _rb = GetComponent<Rigidbody2D>();
             _orPos = transform.position;
             _orRot = transform.rotation.eulerAngles.z;
+        }
+
+        private void Start()
+        {
+            StopRace();
         }
 
         private void Update()
@@ -143,7 +162,7 @@ namespace ScientificGameJam.Player
                     {
                         speed = _rb.velocity.magnitude * Vector2.Dot(_rb.velocity, transform.up) / Mathf.Abs(Vector2.Dot(_rb.velocity, transform.up));
                     }
-                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost;
+                    _rb.velocity = transform.up.normalized * Mathf.Clamp(speed + _verSpeed, -_info.MaxSpeed, _info.MaxSpeed) * _speedBoost * _zoneModifier;
                 }
 
                 transform.Rotate(Vector3.back, _info.TorqueMultiplicator * _rot * _rb.velocity.magnitude);
@@ -166,30 +185,77 @@ namespace ScientificGameJam.Player
         private void OnTriggerEnter2D(Collider2D collision)
         {
             // Player reached finish line
-            if (collision.CompareTag("FinishLine") && _nextId == _checkpointCount - 1)
+            if (collision.CompareTag("FinishLine") && _nextId == _checkpointCount)
             {
                 if (_remainingLaps > 0)
                 {
+                    DisplayDelay();
                     _remainingLaps--;
                     _nextId = 0;
                 }
                 else
                 {
                     _canMove = false; // Not using setter so we don't touch the rb
+                    SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer,
+                        new List<PlayerCoordinate>(_currentCoordinates),
+                        new List<float>(_checkpointTimes));
                     RaceManager.Instance.EndRace();
-                    SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, new List<PlayerCoordinate>(_currentCoordinates));
                 }
             }
             else if (collision.CompareTag("Checkpoint") && _nextId == collision.gameObject.GetComponent<Checkpoint>().Id)
             {
+                DisplayDelay();
                 _nextId++;
             }
+            else if (collision.CompareTag("ZoneBoost"))
+            {
+                var modifier = collision.gameObject.GetComponent<Modifier>();
+                if (PassiveBoosts.Contains(modifier.TargetTag))
+                {
+                    _zoneModifier = modifier.SpeedModifierEnabled;
+                }
+                else
+                {
+                    _zoneModifier = modifier.SpeedModifierBase;
+                }
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.CompareTag("ZoneBoost"))
+            {
+                _zoneModifier = 1f;
+            }
+        }
+
+        private int _nextCheckpointId = 0;
+
+        public void DisplayDelay()
+        {
+            var timer = Time.unscaledTime - _timerRef;
+            _checkpointTimes.Add(timer);
+            if (SaveLoad.Instance.HaveBestTime)
+            {
+                var diff = timer - SaveLoad.Instance.Checkpoints[_nextCheckpointId];
+                _timerCheckpointDiff.gameObject.SetActive(true);
+                _timerCheckpointDiff.text = (diff > 0 ? "+" : "") + diff.ToString("0.00");
+                _timerCheckpointDiff.color = diff > 0 ? Color.red : Color.green;
+                StartCoroutine(WaitAndDisappear());
+            }
+            _nextCheckpointId++;
+        }
+
+        private IEnumerator WaitAndDisappear()
+        {
+            yield return new WaitForSeconds(1f);
+            _timerCheckpointDiff.gameObject.SetActive(false);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             // Slow down player if he touch a wall
-            _rb.velocity /= 2f;
+            _rb.velocity /= 1f;
         }
 
         public void OnMovement(InputAction.CallbackContext value)

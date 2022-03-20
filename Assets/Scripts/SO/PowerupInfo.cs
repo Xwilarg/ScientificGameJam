@@ -7,7 +7,8 @@ namespace ScientificGameJam.SO
     public class PowerupInfo : ScriptableObject
     {
         public string Title;
-        public string Description;
+        public string DescriptionScience;
+        public string DescriptionGame;
 
         public Sprite Image;
 
