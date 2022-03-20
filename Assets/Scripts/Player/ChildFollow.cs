@@ -12,7 +12,7 @@ namespace ScientificGameJam.Player
 
         public bool IsInZone;
 
-        private void Awake()
+        private void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
             _orPos = transform.position;
