@@ -11,6 +11,7 @@ namespace ScientificGameJam.SO
         public string DescriptionGame;
 
         public Sprite Image;
+        public Sprite ExplEn, ExplFr;
 
         //Wether the power-up is passive or activates with a button
         public bool IsPassive;

@@ -2,6 +2,7 @@ using ScientificGameJam.PowerUp;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ScientificGameJam.UI
 {
@@ -55,6 +56,7 @@ namespace ScientificGameJam.UI
 
             messageInstance = Instantiate(messagePrefab, _canvas);
             messageInstance.GetComponentInChildren<TMP_Text>().text = puManager.GetPowerupDescription(powerUpName);
+            messageInstance.GetComponentInChildren<Image>().sprite = puManager.GetPowerupExpl(powerUpName);
         }
 
         public void OnPointerExit(PointerEventData eventData)
