@@ -402,6 +402,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1469814216552070468}
     m_Modifications:
+    - target: {fileID: 8686260818599224792, guid: 4723aa36c361b4044984bb26aef95837, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 8686260818599224797, guid: 4723aa36c361b4044984bb26aef95837, type: 3}
       propertyPath: m_Name
       value: Footprint
