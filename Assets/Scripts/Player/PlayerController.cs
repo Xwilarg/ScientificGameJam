@@ -68,10 +68,14 @@ namespace ScientificGameJam.Player
         private int _checkpointCount;
 
         [SerializeField]
+        private int _remainingLapsRef;
         private int _remainingLaps;
 
         public void StopRace()
         {
+            _speedBoost = 1f;
+            _remainingLaps = _remainingLapsRef;
+            _nextId = 0;
             transform.position = _orPos;
             transform.rotation = Quaternion.Euler(0f, 0f, _orRot);
             foreach (var ghost in _ghosts)
@@ -96,8 +100,6 @@ namespace ScientificGameJam.Player
 
         public void StartRace()
         {
-            _speedBoost = 1f;
-
             UpdatePowerupList();
 
             _currentCoordinates.Clear();
@@ -117,6 +119,11 @@ namespace ScientificGameJam.Player
             _rb = GetComponent<Rigidbody2D>();
             _orPos = transform.position;
             _orRot = transform.rotation.eulerAngles.z;
+        }
+
+        private void Start()
+        {
+            StopRace();
         }
 
         private void Update()
