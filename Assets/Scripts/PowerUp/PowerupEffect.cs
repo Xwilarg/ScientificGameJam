@@ -5,6 +5,7 @@
         SecretPassage,
         SpeedBoost,
         ZoneBoost,
-        DebugPrint
+        DebugPrint,
+        Empreinte
     }
 }

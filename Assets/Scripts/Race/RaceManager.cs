@@ -24,6 +24,9 @@ namespace ScientificGameJam.Race
         }
 
         [SerializeField]
+        private Arrow[] _arrows;
+
+        [SerializeField]
         private LevelInfo _currentLevel;
 
         /// <summary>
@@ -148,7 +151,11 @@ namespace ScientificGameJam.Race
                     _medals[i].color = Color.white;
                 }
             }
-            PowerUpManager.Instance.ClearPowerups();
+            //PowerUpManager.Instance.ClearPowerups();
+            foreach (var a in _arrows)
+            {
+                a.DisplayNormal();
+            }
         }
 
         private IEnumerator LaunchRaceCountdown()
@@ -172,17 +179,22 @@ namespace ScientificGameJam.Race
             _didRaceStart = true;
         }
 
-        private void RefreshPowerups()
+        public void RefreshPowerups()
         {
             _player.ActivePowerups.Clear();
             _player.PassiveBoosts.Clear();
+            _player.Footprints.SetActive(false);
             foreach (var power in PowerUpManager.Instance.EquippedPowerUps)
             {
                 if (power == null)
                 {
                     continue;
                 }
-                if (power.IsPassive)
+                if (power.Effect == PowerupEffect.Empreinte)
+                {
+                    _player.Footprints.SetActive(true);
+                }
+                else if (power.IsPassive)
                 {
                     // PowerUpManager.Instance.TriggerPowerup(power, _player);
                     if (power.Effect == PowerupEffect.ZoneBoost)
@@ -193,6 +205,18 @@ namespace ScientificGameJam.Race
                 else
                 {
                     _player.ActivePowerups.Add(power);
+                }
+            }
+            var haveArrowPowerup = PowerUpManager.Instance.EquippedPowerUps.Any(x => x != null && x.Id == "durotaxieName");
+            foreach (var a in _arrows)
+            {
+                if (haveArrowPowerup)
+                {
+                    a.DisplayNormal();
+                }
+                else
+                {
+                    a.DisplayGrey();
                 }
             }
         }
