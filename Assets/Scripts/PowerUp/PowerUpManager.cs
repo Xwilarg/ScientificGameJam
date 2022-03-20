@@ -38,10 +38,10 @@ namespace ScientificGameJam.PowerUp
             Instance = this;
 
             // DEBUG
-            /*foreach (var p in _powers)
+            foreach (var p in _powers)
             {
                 AvailablePowerUps.Add(p);
-            }*/
+            }
         }
 
         public void Start()

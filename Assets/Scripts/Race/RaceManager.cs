@@ -151,7 +151,7 @@ namespace ScientificGameJam.Race
                     _medals[i].color = Color.white;
                 }
             }
-            PowerUpManager.Instance.ClearPowerups();
+            //PowerUpManager.Instance.ClearPowerups();
             foreach (var a in _arrows)
             {
                 a.DisplayNormal();
@@ -179,7 +179,7 @@ namespace ScientificGameJam.Race
             _didRaceStart = true;
         }
 
-        private void RefreshPowerups()
+        public void RefreshPowerups()
         {
             _player.ActivePowerups.Clear();
             _player.PassiveBoosts.Clear();
