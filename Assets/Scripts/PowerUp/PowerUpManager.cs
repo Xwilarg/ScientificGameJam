@@ -35,12 +35,6 @@ namespace ScientificGameJam.PowerUp
         public void Awake()
         {
             Instance = this;
-
-            // Debug
-            foreach (var power in _powers)
-            {
-                AvailablePowerUps.Add(power);
-            }
         }
 
         public void Start()
@@ -48,6 +42,16 @@ namespace ScientificGameJam.PowerUp
             puPrefabHeight = puPrefab.GetComponent<RectTransform>().sizeDelta.y;
 
             ToggleDisplay(true);
+        }
+
+        public void GainPowerup()
+        {
+            var remainings = _powers.Where(x => !ContainsPowerup(x.Title)).ToArray();
+            if (remainings.Any())
+            {
+                var random = remainings[UnityEngine.Random.Range(0, remainings.Length)];
+                AvailablePowerUps.Add(random);
+            }
         }
 
         private List<GameObject> _instanciated = new List<GameObject>();
