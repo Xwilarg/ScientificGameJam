@@ -178,7 +178,7 @@ namespace ScientificGameJam.Player
 
             if (DebugManager.Instance != null)
             {
-                DebugManager.Instance.UpdateDebugText($"Speed: {_rb.velocity.magnitude:0.00}\nNext checkpoint: {_nextId}\nLaps remaining: {_remainingLaps}");
+                DebugManager.Instance.UpdateDebugText($"Speed: {_rb.velocity.magnitude:0.00}\nNext checkpoint: {_nextId}\nLaps remaining: {_remainingLaps}\nPassive boosts: {string.Join(", ", PassiveBoosts)}");
             }
         }
 
