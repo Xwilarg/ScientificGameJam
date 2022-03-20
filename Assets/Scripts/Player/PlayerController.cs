@@ -183,8 +183,8 @@ namespace ScientificGameJam.Player
                 else
                 {
                     _canMove = false; // Not using setter so we don't touch the rb
-                    RaceManager.Instance.EndRace();
                     SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer, new List<PlayerCoordinate>(_currentCoordinates));
+                    RaceManager.Instance.EndRace();
                 }
             }
             else if (collision.CompareTag("Checkpoint") && _nextId == collision.gameObject.GetComponent<Checkpoint>().Id)
@@ -196,7 +196,7 @@ namespace ScientificGameJam.Player
         private void OnCollisionEnter2D(Collision2D collision)
         {
             // Slow down player if he touch a wall
-            _rb.velocity /= 2f;
+            _rb.velocity /= 1f;
         }
 
         public void OnMovement(InputAction.CallbackContext value)
