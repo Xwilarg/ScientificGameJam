@@ -113,7 +113,9 @@ namespace ScientificGameJam.PowerUp
         public string GetPowerupDescription(string name)
         {
             var elem = _powers.First(x => x != null && x.Title == name);
-            return $"{Translate.Instance.Tr(elem.DescriptionGame)}\n\n{Translate.Instance.Tr(elem.DescriptionScience)}";
+            var descGa = string.IsNullOrEmpty(elem.DescriptionGame) ? elem.DescriptionGame : Translate.Instance.Tr(elem.DescriptionGame);
+            var descSc = string.IsNullOrEmpty(elem.DescriptionScience) ? elem.DescriptionScience : Translate.Instance.Tr(elem.DescriptionScience);
+            return $"{descGa}\n\n{descSc}";
         }
 
         public void ClearPowerups()
