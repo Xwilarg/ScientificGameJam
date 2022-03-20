@@ -16,6 +16,8 @@ MonoBehaviour:
   DescriptionScience: migrationScience
   DescriptionGame: migrationGame
   Image: {fileID: 21300000, guid: d4e47ab77a853bd43aada6ae54a37adf, type: 3}
+  ExplEn: {fileID: 21300000, guid: d372339e665134a47b024d79448445b7, type: 3}
+  ExplFr: {fileID: 21300000, guid: 1938bf06bac261044ad43b6d2f9e60fc, type: 3}
   IsPassive: 1
   Argument: Migration
   Effect: 2

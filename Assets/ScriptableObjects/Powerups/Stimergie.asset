@@ -16,6 +16,8 @@ MonoBehaviour:
   DescriptionScience: stigmergieScience
   DescriptionGame: stigmergieGame
   Image: {fileID: 21300000, guid: 01c64574578197946bea27131f2d39b2, type: 3}
+  ExplEn: {fileID: 21300000, guid: f011b56dca967f6488bad7a0d8dc4cd3, type: 3}
+  ExplFr: {fileID: 21300000, guid: 014462cec417812438c5f5874638c223, type: 3}
   IsPassive: 0
   Argument: 
   Effect: 4

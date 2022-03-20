@@ -16,6 +16,8 @@ MonoBehaviour:
   DescriptionScience: lamellipodeScience
   DescriptionGame: lamellipodeGame
   Image: {fileID: 21300000, guid: c19ed5e7f221f6342b235232c030dd5f, type: 3}
+  ExplEn: {fileID: 21300000, guid: 38db58e5763e421458151f489efcac7a, type: 3}
+  ExplFr: {fileID: 21300000, guid: a65c3d1c46c0e2c42a34096e76592f82, type: 3}
   IsPassive: 0
   Argument: 1.5
   Effect: 1
