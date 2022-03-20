@@ -14,12 +14,16 @@
     "chimiotaxieGame": "Les passages possédant un gradient chimique pourront être parcourus plus rapidement.",
     
     "lamellipodeName": "Lamellipode amélioré",
-    "lamellipodeScience": "Avoir un lamellipode augmenté vous fait aller plus vite.",
-    "lamellipodeGame": "Le lamellipode est la partie de la cellule à l'origine du mouvement pour les cellules adhérentes. Dans cette zone très dynamique à l'avant de la cellule se forme de nombreuses adhésions avec le substrat par l'intermédiaire de complexe de protéines appelés adhésions focales. Les adhésions focales servent de point d'ancrage à la cellule pour se propulser.",
-    
+    "lamellipodeScience": "Le lamellipode est la partie de la cellule à l'origine du mouvement pour les cellules adhérentes. Dans cette zone très dynamique à l'avant de la cellule se forme de nombreuses adhésions avec le substrat par l'intermédiaire de complexe de protéines appelés adhésions focales. Les adhésions focales servent de point d'ancrage à la cellule pour se propulser.",
+    "lamellipodeGame": "Avoir un lamellipode augmenté vous fait aller plus vite.",
+
     "migrationName": "Migration mésenchymateuse",
     "migrationScience": "Certaines mutations, notamment celles affectant les jonctions entre cellules, peuvent donner lieu à une migration collective mésenchymateuse. La modification des jonctions intercellulaires va déstabiliser le collectif de cellule et favoriser la propulsion individuelle celles-ci. Cette nouvelle propulsion rend les cellules beaucoup plus invasives. Ce phénomène est en jeu dans de nombreux cancer. Des cellules mutantes risque de s'échapper de la tumeur principale pour aller former des tumeurs secondaires appelés métastases. Cette migration invasive s'appelle la migration mésenchymateuse.",
     "migrationGame": "La capacité invasive de la migration mésenchymateuse permet de prendre les passages bloqués par d'autres cellules.",
+
+    "durotaxieName": "Durotaxie",
+    "durotaxieScience": "Les cellules possèdent le sens du toucher. Elles sont mécano-sensitives, c'est-à-dire qu'elles sont capables de sentir la rigidité du substrat sur lequel elles adhèrent. Il existe une rigidité optimale pour laquelle les cellules vont le plus vite. Si le substrat est trop rigide, elles seront trop adhérentes et deviendront immobiles, si le substrat est trop mou, elles utiliseront la majorité de leur énergie à déformer le substrat et non à se propulser. Pour cette course vous êtes au départ sur un substrat plus mou que votre rigidité optimale, les zones plus rigides vous accélèreront mais attention les zones plus molles vous ralentiront. Ce phénomène s'appelle la durotaxie.",
+    "durotaxieGame": "Révèle si les zones de rigidité différentes sont des booster ou des ralentisseurs.",
 
     "colon": " :"
 }

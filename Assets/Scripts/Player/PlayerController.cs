@@ -1,3 +1,4 @@
+using ScientificGameJam.Audio;
 using ScientificGameJam.Debug;
 using ScientificGameJam.PowerUp;
 using ScientificGameJam.Race;
@@ -24,6 +25,8 @@ namespace ScientificGameJam.Player
 
         [SerializeField]
         private TMP_Text _timerCheckpointDiff;
+
+        private AudioSource _source;
 
         // Base controls
         private Rigidbody2D _rb;
@@ -80,8 +83,12 @@ namespace ScientificGameJam.Player
         private int _remainingLapsRef;
         private int _remainingLaps;
 
+        [SerializeField]
+        private AudioClip _newTurnSFX, _checkpointSFX, _actionSFX;
+
         public void StopRace()
         {
+            _powerupContainer.SetActive(false);
             _zoneModifier = 1f;
             _speedBoost = 1f;
             _remainingLaps = _remainingLapsRef;
@@ -131,6 +138,7 @@ namespace ScientificGameJam.Player
             _rb = GetComponent<Rigidbody2D>();
             _orPos = transform.position;
             _orRot = transform.rotation.eulerAngles.z;
+            _source = GetComponent<AudioSource>();
         }
 
         private void Start()
@@ -144,6 +152,14 @@ namespace ScientificGameJam.Player
             {
                 _speedBoost -= Time.deltaTime * _info.BoostReduce;
                 if (_speedBoost < 1f)
+                {
+                    _speedBoost = 1f;
+                }
+            }
+            else if (_speedBoost < 1f)
+            {
+                _speedBoost += Time.deltaTime * _info.BoostReduce;
+                if (_speedBoost > 1f)
                 {
                     _speedBoost = 1f;
                 }
@@ -189,6 +205,7 @@ namespace ScientificGameJam.Player
             {
                 if (_remainingLaps > 0)
                 {
+                    _source.PlayOneShot(_newTurnSFX);
                     DisplayDelay();
                     _remainingLaps--;
                     _nextId = 0;
@@ -196,27 +213,52 @@ namespace ScientificGameJam.Player
                 else
                 {
                     _canMove = false; // Not using setter so we don't touch the rb
-                    SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer,
+                    var didBestLastRecord = SaveLoad.Instance.UpdateBestTime(RaceManager.Instance.RaceTimer,
                         new List<PlayerCoordinate>(_currentCoordinates),
                         new List<float>(_checkpointTimes));
+
+                    if (didBestLastRecord)
+                    {
+                        BGMManager.Instance.PlayEndRaceAlt();
+                    }
+                    else
+                    {
+                        BGMManager.Instance.PlayEndRace();
+                    }
+
                     RaceManager.Instance.EndRace();
                 }
             }
             else if (collision.CompareTag("Checkpoint") && _nextId == collision.gameObject.GetComponent<Checkpoint>().Id)
             {
+                _source.PlayOneShot(_checkpointSFX);
                 DisplayDelay();
                 _nextId++;
             }
             else if (collision.CompareTag("ZoneBoost"))
             {
                 var modifier = collision.gameObject.GetComponent<Modifier>();
-                if (PassiveBoosts.Contains(modifier.TargetTag))
+                if (modifier.GiveBoost)
                 {
-                    _zoneModifier = modifier.SpeedModifierEnabled;
+                    if (PassiveBoosts.Contains(modifier.TargetTag))
+                    {
+                        GainSpeedBoost(modifier.SpeedModifierEnabled);
+                    }
+                    else
+                    {
+                        GainSpeedBoost(modifier.SpeedModifierBase);
+                    }
                 }
                 else
                 {
-                    _zoneModifier = modifier.SpeedModifierBase;
+                    if (PassiveBoosts.Contains(modifier.TargetTag))
+                    {
+                        _zoneModifier = modifier.SpeedModifierEnabled;
+                    }
+                    else
+                    {
+                        _zoneModifier = modifier.SpeedModifierBase;
+                    }
                 }
             }
         }
@@ -225,7 +267,11 @@ namespace ScientificGameJam.Player
         {
             if (collision.CompareTag("ZoneBoost"))
             {
-                _zoneModifier = 1f;
+                var modifier = collision.gameObject.GetComponent<Modifier>();
+                if (!modifier.GiveBoost)
+                {
+                    _zoneModifier = 1f;
+                }
             }
         }
 
@@ -272,6 +318,7 @@ namespace ScientificGameJam.Player
                 PowerUpManager.Instance.TriggerPowerup(ActivePowerups[0], this);
                 ActivePowerups.RemoveAt(0);
                 UpdatePowerupList();
+                _source.PlayOneShot(_actionSFX);
             }
         }
     }
