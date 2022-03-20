@@ -546,10 +546,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "D\xE9marrer\n"
+  m_text: '{play}'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
-  m_sharedMaterial: {fileID: -4557796502782744432, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1389,7 +1389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Effets sonores
+  m_text: '{sfx}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
   m_sharedMaterial: {fileID: -4557796502782744432, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
@@ -1894,7 +1894,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Langue
+  m_text: '{language}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
   m_sharedMaterial: {fileID: -4557796502782744432, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
@@ -2201,10 +2201,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cr\xE9dits\n"
+  m_text: '{credits}'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
-  m_sharedMaterial: {fileID: -4557796502782744432, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2289,6 +2289,7 @@ GameObject:
   - component: {fileID: 912596206}
   - component: {fileID: 912596208}
   - component: {fileID: 912596207}
+  - component: {fileID: 912596209}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2335,9 +2336,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Victor - Scientifique\n\nPam et Nad\xE8ge - Game Designer\n\nZirk - Gameplay
-    Developper\nPancho - Gameplay Developper\nNethos - UI Developper\n\nSolenne Marty
-    - Graphiste\nHefka - Sound Designer\n"
+  m_text: "{creditsScience}\nVictor Cellerin\n\n{creditsGD}\nPam Ravail\nNad\xE8ge
+    Genty\n\n{creditsGraph}\nSolenne Marty\n\n{creditsAudio}\nFranck \"Hefka\" Poulhon\n\n{creditsProg}\nGuillaume
+    \"Pancho\" Caucheteux\nNethos\nChristian \"Xwilarg\" Chaux"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
   m_sharedMaterial: {fileID: -4557796502782744432, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
@@ -2364,8 +2365,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2414,6 +2415,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912596205}
   m_CullTransparentMesh: 1
+--- !u!114 &912596209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912596205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3163e314542d4a54d93200fab34d7715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &989643169
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,7 +2559,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Musique
+  m_text: '{music}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
   m_sharedMaterial: {fileID: -4557796502782744432, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
@@ -2680,10 +2693,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Options
+  m_text: '{options}'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
-  m_sharedMaterial: {fileID: -4557796502782744432, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2901,8 +2914,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "AcCELL\xE8re"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
-  m_sharedMaterial: {fileID: -4557796502782744432, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4033,7 +4046,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Menu
+  m_text: '{menu}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
   m_sharedMaterial: {fileID: -4557796502782744432, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
@@ -4363,7 +4376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Menu
+  m_text: '{menu}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}
   m_sharedMaterial: {fileID: -4557796502782744432, guid: fc5fe40326b831743bc80f4c1d90eba3, type: 2}

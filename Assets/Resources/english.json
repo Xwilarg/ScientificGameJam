@@ -1,13 +1,27 @@
 {
-    "play": "Jouer",
+    "play": "Play",
+    "options": "Settings",
+    "credits": "Credits",
     "best": "Best",
     "none": "None",
     "retry": "Retry",
     "next": "Next",
 
-    "yourTime": "Your time",
     "gotAllMedals": "You got all medals!",
     "nextMedal": "Do less than {0}s for the next medal!",
+    "colon": ":",
+    "yourTime": "Your time",
 
-    "colon": ":"
+    "chimiotaxieName": "Chimiotaxis",
+    "chimiotaxieScience": "Cells live in a complex chemical environment. Some cells are able to sense and follow chemical gradients. This means that they will move towards the source diffusing these molecules by moving towards the most concentrated areas. This is a major phenomenon to guide the movement of cells that occurs multiples times during embryonic development. This mechanism is called chemotaxis.",
+    "chimiotaxieGame": "Passages with a chemical gradient can be crossed more quickly.",
+    "lamellipodeName": "Enhanced Lamellipodia",
+    "lamellipodeScience": "The lamellipodia is the main part of the cell that initiates movement for adherent cells. In this highly dynamic area at the front of the cell, numerous adhesions with the substrate are formed via protein complexes called focal adhesions. Focal adhesions serve as an anchor point for the cell to propel itself.",
+    "lamellipodeGame": "Having an enhanced lamellipodia makes you go faster.",
+    "migrationName": "Mesenchymal migration",
+    "migrationScience": "Some mutations, particularly those affecting cell-cell junctions, can give rise to collective mesenchymal migration. These modifications of the intercellular junctions will destabilize the cell collective and favor individual propulsion. This new propulsion makes the cells much more invasive. This phenomenon is at play in many cancers. Mutated cells may escape from the main tumor to form secondary tumors called metastases. This invasive migration is called mesenchymal migration.",
+    "migrationGame": "The invasive capacity of the mesenchymal migration allows to take the crowded passages.",
+    "durotaxieName": "Durotaxis",
+    "durotaxieScience": "The cells have a sense of touch. They are mechano-sensitive, they are able to feel the rigidity of the substrate on which they adhere. There is an optimal rigidity for which the cells go the fastest. If the substrate is too rigid, they will be too adherent and will become immobile, if the substrate is too soft, they will use most of their energy to deform the substrate and not to propel themselves. For this race you start on a substrate that is softer than your optimal stiffness, the stiffer areas will accelerate you but beware, the softer areas will slow you down. This phenomenon is called durotaxis.",
+    "durotaxieGame": "Reveals whether the different stiffness zones are booster or retarder zones that can now be used."
 }

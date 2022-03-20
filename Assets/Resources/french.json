@@ -1,5 +1,17 @@
 {
     "play": "Jouer",
+    "options": "Options",
+    "credits": "Crédits",
+    "menu": "Menu",
+    "language": "Langues",
+    "music": "Musics",
+    "sfx": "Effets sonores",
+    "creditsScience": "Scientifique",
+    "creditsGD": "Game Design",
+    "creditsProg": "Programmation",
+    "creditsGraph": "Graphismes",
+    "creditsAudio": "Sons et musiques",
+
     "best": "Meilleur",
     "none": "Aucun",
     "retry": "Rééssayer",
