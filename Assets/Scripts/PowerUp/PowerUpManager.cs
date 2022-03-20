@@ -107,6 +107,11 @@ namespace ScientificGameJam.PowerUp
             return EquippedPowerUps.Any(x => x != null && x.Title == name);
         }
 
+        public String GetPowerupDescription(string name)
+        {
+            return EquippedPowerUps.First(x => x?.Title == name).Description;
+        }
+
         public void ClearPowerups()
         {
             for (int i = 0; i < _powers.Length; i++)

@@ -1,9 +1,10 @@
+using ScientificGameJam.PowerUp;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace ScientificGameJam.UI
 {
-    public class PUDragHandler : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+    public class PUDragHandler : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler
     {
         private RectTransform _canvas; //UI Canvas
         private Vector2 _offset;
@@ -37,6 +38,14 @@ namespace ScientificGameJam.UI
         {
             canvasGroup.blocksRaycasts = true;
             Destroy(draggedObject);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            PowerUpManager puManager = FindObjectOfType<PowerUpManager>();
+
+            UnityEngine.Debug.Assert(puManager != null);
+            UnityEngine.Debug.Log(puManager.GetPowerupDescription(powerUpName));
         }
     }
 }
