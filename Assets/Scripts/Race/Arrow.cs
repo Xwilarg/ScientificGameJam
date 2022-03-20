@@ -14,6 +14,7 @@ namespace ScientificGameJam.Race
         private void Start()
         {
             _sr = GetComponent<SpriteRenderer>();
+            _normal = _sr.sprite;
         }
 
         public void DisplayNormal()
