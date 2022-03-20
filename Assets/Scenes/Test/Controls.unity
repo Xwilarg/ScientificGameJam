@@ -488,6 +488,7 @@ MonoBehaviour:
   _courseEndGo: {fileID: 1951280141}
   _timerEnd: {fileID: 1992663177}
   _msgEnd: {fileID: 589367005}
+  _medals: []
 --- !u!114 &141906616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +508,7 @@ MonoBehaviour:
   _powers:
   - {fileID: 11400000, guid: 5e5c40e9d4a79ed40a0ba4bbd42d54ad, type: 2}
   - {fileID: 11400000, guid: 3a91dfdf7f9997841b8ad6414538a06c, type: 2}
+  - {fileID: 11400000, guid: b8f4caa64a31c814cb7edb79399aa8b1, type: 2}
 --- !u!1 &251121965
 GameObject:
   m_ObjectHideFlags: 0
@@ -38295,8 +38297,8 @@ GameObject:
   - component: {fileID: 2145873796}
   - component: {fileID: 2145873797}
   m_Layer: 0
-  m_Name: Boost
-  m_TagString: Untagged
+  m_Name: Migration
+  m_TagString: ZoneBoost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38340,13 +38342,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -4.102781, y: 25.428043}
-      - {x: -4.0829086, y: 39.090614}
-      - {x: -11.884978, y: 39.043808}
-      - {x: -11.9442, y: 44.000755}
-      - {x: 1.7072465, y: 44.004436}
-      - {x: 2.0326033, y: 25.007612}
-      - {x: -4.032696, y: 25.148514}
+    - - {x: -7.2778378, y: 22.479776}
+      - {x: -17.085522, y: 32.06013}
+      - {x: -17.101143, y: 39.950966}
+      - {x: -11.868603, y: 39.086975}
+      - {x: -11.975737, y: 32.96734}
+      - {x: -4.0151243, y: 25.158806}
+      - {x: -3.957099, y: 19.403173}
 --- !u!114 &2145873797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38359,9 +38361,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95c459470255e641bfc9dd81fd54e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedModifierBase: 0
-  SpeedModifierEnabled: 0
-  TargetTag: 
+  SpeedModifierBase: 0.95
+  SpeedModifierEnabled: 1.5
+  TargetTag: Migration
 --- !u!1001 &1469814217780791195
 PrefabInstance:
   m_ObjectHideFlags: 0

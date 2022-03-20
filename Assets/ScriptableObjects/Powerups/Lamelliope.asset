@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cff10df4a87f5244a3fa28f4172622f, type: 3}
   m_Name: Lamelliope
   m_EditorClassIdentifier: 
-  Title: "Lamellipode am\xE9lior\xE9"
-  DescriptionScience: 
-  DescriptionGame: 
+  Title: lamellipodeName
+  DescriptionScience: lamellipodeScience
+  DescriptionGame: lamellipodeGame
   Image: {fileID: 21300000, guid: c19ed5e7f221f6342b235232c030dd5f, type: 3}
   IsPassive: 0
   Argument: 1.5
