@@ -28,7 +28,6 @@ public class ParticlesTrails : MonoBehaviour
         // get
         int numInside = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Inside, inside);
 
-        Debug.Log("Currently in : " + numInside);
         if (numInside > threshold)
         {
             _playerController.EnablePrintBonus();
