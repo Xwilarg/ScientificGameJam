@@ -7,5 +7,6 @@ namespace ScientificGameJam.Race
         public float SpeedModifierBase;
         public float SpeedModifierEnabled;
         public string TargetTag;
+        public bool GiveBoost;
     }
 }
